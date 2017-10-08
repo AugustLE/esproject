@@ -1,0 +1,91 @@
+{% extends 'homepage/basefile-styling.html' %}
+
+{% block base %}
+
+
+    <body>
+
+        <div class="top-container">
+
+
+            <nav class="navbar navbar-light navbar-fixed-top">
+
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_navbar">
+
+                            <span class="icon-bar" style="background-color: #000000;"></span>
+                            <span class="icon-bar" style="background-color: #000000;"></span>
+                            <span class="icon-bar" style="background-color: #000000;"></span>
+
+                        </button>
+                        <a id="company_header" class="navbar-brand" href="{% url 'homepage:index' %}">
+                            <!--<img id="company_header" src="../../static/home/Title_logo.svg">-->
+                            ADALL
+                        </a>
+
+                    </div>
+                    <div class="collapse navbar-collapse" id="main_navbar">
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li id="nav_about" >
+                                <a href="#"
+                                    {% if view.id == 0 %}
+                                        class="active"
+
+                                    {% endif %}>
+
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> OM OSS
+
+                                </a>
+                            </li>
+
+                            <li id="nav_gdpr">
+
+                                <a href="#"
+                                    {% if view.id == 1 %}
+                                        class="active"
+                                    {% endif %} >
+
+                                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> OM GDPR
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#" id="navigasjons_bar"
+
+                                    {% if view.id == 2 %}
+                                        class="active"
+                                    {% endif %} >
+
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> SJEKKLISTER
+                                </a>
+
+                            </li>
+
+                            &nbsp;
+                            &nbsp;
+
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+
+    </body>
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+{% endblock %}
