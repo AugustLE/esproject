@@ -11,6 +11,7 @@ lib64
 .pyc
 
 .idea
-esproj/__pycache__/
 
-.idea
+__pycache__
+
+esproject/__pycache__/settings.cpython-36.pyc
