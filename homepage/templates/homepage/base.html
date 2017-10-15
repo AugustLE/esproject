@@ -21,8 +21,8 @@
 
                         </button>
                         <a id="company_header" class="navbar-brand" href="{% url 'homepage:index' %}">
-                            <!--<img id="company_header" src="../../static/home/Title_logo.svg">-->
-                            ADALL
+                            <img id="company_header" src="../../static/homepage/images/Logo_2.svg">
+
                         </a>
 
                     </div>
@@ -31,7 +31,7 @@
                         <ul class="nav navbar-nav navbar-right">
 
                             <li id="nav_about" >
-                                <a href="#"
+                                <a href="{% url 'homepage:about' %}"
                                     {% if view.id == 0 %}
                                         class="active"
 
