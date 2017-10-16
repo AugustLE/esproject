@@ -7,7 +7,7 @@ app_name = 'homepage'
 urlpatterns = [
 
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^about$', views.AboutView.as_view(), name='about'),
+    url(r'^about/$', views.AboutView.as_view(), name='about'),
 
 
 ]
