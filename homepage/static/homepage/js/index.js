@@ -2,7 +2,7 @@
 function resizeHeaderOnScroll() {
 
   var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-  shrinkOn = 100;
+  shrinkOn = 60;
   headerEl = document.getElementById('top_image_container');
   checklist = document.getElementById('checklist');
   //checklist.style.height = '500px';
@@ -28,11 +28,20 @@ function resizeHeaderOnScroll() {
 function checkWidth() {
 
     if($(window).width() > 900) {
-          checklist.style.height = '250px';
+
+        checklist.style.height = '250px';
     } else {
 
-      checklist.style.height = '500px';
+        checklist.style.height = '500px';
     }
+}
+
+function scrollDown() {
+
+
+    $('body,html').animate({
+        scrollTop: $('#checklist_title').offset().top - 76
+    }, 2000);
 }
 
 
@@ -41,5 +50,6 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
 window.onload = function() {
 
     checkWidth();
+    setTimeout(scrollDown, 500);
 
 };

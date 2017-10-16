@@ -27,3 +27,14 @@ class AboutView(generic.ListView):
 
         return "Om oss"
 
+
+class AboutGDPRView(generic.ListView):
+
+    model = None
+    template_name = 'homepage/aboutGDPR.html'
+    id = 2
+    context_object_name = 'query_set'
+
+    def get_queryset(self):
+
+        return "Om GDPR"

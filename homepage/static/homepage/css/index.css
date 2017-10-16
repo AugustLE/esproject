@@ -17,10 +17,12 @@
 .navbar {
 
     border-bottom-color: #7aa2a5;
-    position:relative;
+    /*position:relative;*/
     padding: 0;
     margin: 0;
-    background-color: rgba(0, 194, 255, 0.60);
+    /*background-color: rgba(0, 194, 255, 0.60);*/
+    background-color: rgba(0, 194, 255, 0.10);
+    position: fixed;
      /*box-shadow: 0px 1px 8px -2px #000000;*/
 }
 
@@ -53,10 +55,10 @@
 
 .top_image_container h2 {
 
-    margin-top: 6.5%;
+    margin-top: 10.0%;
     position: absolute;
     opacity: 0.9;
-    font-size: 30px;
+    font-size: 40px;
     font-family: Copperplate;
     transition: all .3s linear;
 
@@ -64,8 +66,8 @@
 
 .top_image_container div {
     position: absolute;
-    font-size: 80px;
-    margin-top: -3.5%;
+    font-size: 120px;
+    margin-top: 1%;
     opacity: 0.9;
     display: flex;
     justify-content: center;
@@ -102,6 +104,44 @@
 
 }
 
+.checklist_title {
+
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.checklist_title h1 {
+
+
+    font-family: Copperplate;
+    width: 90%;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.checklist_title hr {
+
+    margin: 6px;
+    width: 40%;
+    border-color: rgba(110, 110, 110, 0.52);
+
+    color: #6e6e6e;
+    min-width: 160px;
+}
+
 .shrink {
 
 
@@ -117,22 +157,26 @@
   .top_image_container div {
 
       font-size: 70px;
+      margin-top: 3.0%;
   }
 
     .top_image_container h2 {
 
         font-size: 25px;
+        margin-top: 10.0%;
     }
 }
 @media screen and (max-width: 900px) {
   .top_image_container div {
 
       font-size: 60px;
+      margin-top: 3.5%;
   }
 
     .top_image_container h2 {
 
         font-size: 20px;
+        margin-top: 11.0%;
     }
 
     #checklist {
@@ -145,22 +189,26 @@
   .top_image_container div {
 
       font-size: 60px;
+      margin-top: 4.0%;
   }
 
     .top_image_container h2 {
 
         font-size: 20px;
+        margin-top: 11.5%;
     }
 }
 @media screen and (max-width: 600px) {
   .top_image_container div {
 
       font-size: 50px;
+      margin-top: 4.0%;
   }
 
     .top_image_container h2 {
 
         font-size: 18px;
+        margin-top: 11.5%;
     }
 }
 @media screen and (max-width: 500px) {
@@ -172,5 +220,6 @@
     .top_image_container h2 {
 
         font-size: 15px;
+        margin-top: 12.5%;
     }
 }
