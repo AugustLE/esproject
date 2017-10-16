@@ -38,3 +38,16 @@ class AboutGDPRView(generic.ListView):
     def get_queryset(self):
 
         return "Om GDPR"
+
+class ChecklistView(generic.ListView):
+
+    model = None
+    template_name = 'homepage/checklists.html'
+    id = 3
+    context_object_name = 'query_set'
+
+    def get_queryset(self):
+
+        return "Sjekklister"
+
+

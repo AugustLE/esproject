@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^aboutUs/$', views.AboutView.as_view(), name='aboutUs'),
     url(r'^aboutGDPR/$', views.AboutGDPRView.as_view(), name='aboutGDPR'),
-
+    url(r'^checklists/$', views.ChecklistView.as_view(), name='checklists'),
 
 ]

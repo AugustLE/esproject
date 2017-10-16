@@ -5,6 +5,10 @@
 
 
     {% include 'homepage/top-image-container.html' %}
+    <script src="../../static/homepage/js/index.js"></script>
+    <script src="../../static/homepage/js/scroller.js"></script>
+    <input type="hidden" value="75" id="scroll_offset">
+    <input type="hidden" value="checklist_title" id="scroll_point">
 
     <div class="checklist_title" id="checklist_title">
 
@@ -13,7 +17,7 @@
     </div>
 
     <br>
-    <div id="checklist" class="typeform-widget" data-url="https://adall.typeform.com/to/N41azB" style="width: 100%; height: 300px; z-index: -1;transition: all .3s linear;">
+    <div id="checklist" class="typeform-widget" data-url="https://adall.typeform.com/to/N41azB" style="width: 100%; height: 300px; z-index: -1;transition: all .3s linear; margin-left: 5%;">
     </div>
     <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement,
         gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script");

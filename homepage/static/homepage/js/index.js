@@ -36,20 +36,11 @@ function checkWidth() {
     }
 }
 
-function scrollDown() {
-
-
-    $('body,html').animate({
-        scrollTop: $('#checklist_title').offset().top - 76
-    }, 2000);
-}
-
-
 window.addEventListener('scroll', resizeHeaderOnScroll);
 
 window.onload = function() {
 
     checkWidth();
-    setTimeout(scrollDown, 500);
+
 
 };
