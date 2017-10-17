@@ -21,7 +21,7 @@
 
                         </button>
                         <a id="company_header" class="navbar-brand" href={% url 'homepage:index' %}>
-                            <img id="company_header" src="../../static/homepage/images/Logo_2.svg">
+                            <img id="company_header" src="../../static/homepage/images/Logo_2-2.svg">
 
                         </a>
 
@@ -32,7 +32,7 @@
 
                             <li id="nav_about" >
                                 <a href="{% url 'homepage:aboutUs' %}"
-                                    {% if view.id == 0 %}
+                                    {% if view.id == 1 %}
                                         class="active"
 
                                     {% endif %}>
@@ -45,7 +45,7 @@
                             <li id="nav_gdpr">
 
                                 <a href="{% url 'homepage:aboutGDPR' %}"
-                                    {% if view.id == 1 %}
+                                    {% if view.id == 2 %}
                                         class="active"
                                     {% endif %} >
 
@@ -53,10 +53,10 @@
                                 </a>
                             </li>
 
-                            <li class="">
+                            <li>
                                 <a href="{% url 'homepage:checklists' %}" id="navigasjons_bar"
 
-                                    {% if view.id == 2 %}
+                                    {% if view.id == 3 %}
                                         class="active"
                                     {% endif %} >
 
