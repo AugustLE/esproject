@@ -3,6 +3,13 @@ from django.views import generic
 from django.core.urlresolvers import resolve
 import datetime
 
+from .models import CheckList
+from .models import Question
+from .models import Option
+
+from .CustomClasses.ChecklistLocal import ChecklistLocal
+from .CustomClasses.QuestionLocal import QuestionLocal
+
 class IndexView(generic.ListView):
 
     model = None
@@ -13,7 +20,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
 
-        return "Er du GDPR COMPLIANT?"
+        return ["Er du GDPR COMPLIANT?"]
 
 class AboutView(generic.ListView):
 
@@ -25,7 +32,7 @@ class AboutView(generic.ListView):
 
     def get_queryset(self):
 
-        return "Om oss"
+        return ["Om oss"]
 
 
 class AboutGDPRView(generic.ListView):
@@ -37,7 +44,7 @@ class AboutGDPRView(generic.ListView):
 
     def get_queryset(self):
 
-        return "Om GDPR"
+        return ["Om GDPR"]
 
 class ChecklistView(generic.ListView):
 
@@ -48,6 +55,35 @@ class ChecklistView(generic.ListView):
 
     def get_queryset(self):
 
-        return "Sjekklister"
+        return ["Sjekklister", fetchCheckLists()]
+
+
+def fetchCheckLists():
+
+    all_checklists = []
+
+    for checklistK in CheckList.objects.all():
+
+        checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk)
+
+        for questionK in Question.objects.filter(checkList__pk=checklistK.pk):
+
+            newQuestion = QuestionLocal(questionK.question_text, questionK.isOptions)
+
+            if questionK.isOptions:
+
+                for option in Option.objects.filter(question__pk=questionK.pk, question__isOptions=questionK.isOptions):
+
+                    newQuestion.addOption(option.optionText)
+
+            checklist_1.addQuestion(newQuestion)
+
+
+
+
+        all_checklists.append(checklist_1)
+
+
+    return all_checklists
 
 

@@ -3,43 +3,96 @@
 {% block content %}
 
     {% include 'homepage/top-image-container.html' %}
+    <script src="../../static/homepage/js/checklist.js"></script>
     <!--<script src="../../static/homepage/js/scroller.js"></script>
     <input type="hidden" value="350" id="scroll_offset">
     <input type="hidden" value="item_1" id="scroll_point">-->
 
-    <div class="checklists_menu_container">
+    <div class="checklists_menu">
 
-        <div class="checklists_menu_part" onclick="clickItem(0)" id="item_1">
+        <div class="checklists_menu_item" onclick="clickItem(0)" id="item_1">
 
             <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
             <h2>Liste 1</h2>
 
         </div>
 
-        <div class="checklists_menu_part" onclick="clickItem(1)" id="item_2">
+        <div class="checklists_menu_item" onclick="clickItem(1)" id="item_2">
              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
              <h2>Liste 2</h2>
         </div>
 
-        <div class="checklists_menu_part" onclick="clickItem(2)" id="item_3">
+        <div class="checklists_menu_item" onclick="clickItem(2)" id="item_3">
              <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
              <h2>Liste 3</h2>
         </div>
 
-        <div class="checklists_menu_part" onclick="clickItem(3)" id="item_4">
+        <div class="checklists_menu_item" onclick="clickItem(3)" id="item_4">
             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
              <h2>Liste 4</h2>
          </div>
 
-        <!--<div class="checklists_menu_part" onclick="clickItem(4)" id="item_5">
+        <div class="checklists_menu_item" onclick="clickItem(4)" id="item_5">
             <span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>
-             <h4>Nattbøyle</h4>
+             <h2>Liste 5</h2>
         </div>
 
-        <div class="checklists_menu_part" onclick="clickItem(5)" id="item_6">
+        <div class="checklists_menu_item" onclick="clickItem(5)" id="item_6">
             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-             <h4>Vekstplate</h4>
-        </div> -->
+             <h2>Liste 6</h2>
+        </div>
+
+    </div>
+
+
+    <div id="checlists_content_container">
+
+        <div class="checklist" id="checklist_1">
+
+            <h2>{{ query_set.1.0.getName }}</h2>
+            {% for question in query_set.1.0.getQuestions %}
+
+                <h3>{{ question.getQuestionText }}</h3>
+                {% for option in question.getOptions %}
+
+                    <h5>{{ option }}</h5>
+                {% endfor %}
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <div class="checklist" id="checklist_2">
+
+            <h2>Testcontent 2</h2>
+        </div>
+
+        <div class="checklist" id="checklist_3">
+
+            <h2>Testcontent 3</h2>
+
+        </div>
+
+        <div class="checklist" id="checklist_4">
+
+            <h2>Testcontent 4</h2>
+        </div>
+
+
+        <div class="checklist" id="checklist_5">
+
+            <h2>Testcontent 5</h2>
+        </div>
+
+        <div class="checklist" id="checklist_6">
+            <h2>Testcontent 6</h2>
+
+        </div>
+
+
+
 
     </div>
 
