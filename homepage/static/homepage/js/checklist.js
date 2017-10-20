@@ -18,7 +18,7 @@ function clickItem(id) {
     document.getElementById(menu_ids[id]).style.backgroundColor = "#5690aa";
 
     $('body,html').animate({
-        scrollTop: $('#'+node_ids[id]).offset().top
+        scrollTop: $('#'+node_ids[id]).offset().top - 50
     }, 1000);
 
 }
@@ -53,3 +53,10 @@ window.onload = function() {
 
     initView();
 };
+
+function setValueOnAnswer(object) {
+
+    document.getElementById("answer-" + object.id).value=object.value;
+    console.log(document.getElementById("answer-" + object.id).value);
+}
+

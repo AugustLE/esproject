@@ -45,21 +45,58 @@
     </div>
 
 
-    <div id="checlists_content_container">
+    <div class="checlists_content_container" id="checlists_content_container">
 
         <div class="checklist" id="checklist_1">
+            <h1>{{ query_set.1.0.getName }}</h1>
+            <hr>
 
-            <h2>{{ query_set.1.0.getName }}</h2>
-            {% for question in query_set.1.0.getQuestions %}
+            <form action="{% url 'homepage:sendChecklist' %}" method="post" enctype="multipart/form-data">
 
-                <h3>{{ question.getQuestionText }}</h3>
-                {% for option in question.getOptions %}
+                {% csrf_token %}
 
-                    <h5>{{ option }}</h5>
+                <input type="hidden" name="checklist-id" value={{ query_set.1.0.getId }}>
+
+                {% for question in query_set.1.0.getQuestions %}
+
+                    <div class="question">
+
+                        <h3>{{ question.getQuestionText }}</h3>
+
+                        {% if question.isOptions %}
+
+                            <div class="options" onclick="">
+
+                                {% for option in question.getOptions %}
+
+                                    <input id="option-{{ query_set.1.0.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
+                                           name="option-{{ query_set.1.0.getId }}-{{ question.getId }}-{{ option.getId }}" value="{{ option.getOptionText }}"
+                                           type="button" class="option_button">
+
+                                    <!--<div class="option" onclick="">
+                                        <h5>{{ option.getOptionText }}</h5>
+                                    </div> -->
+                                {% endfor %}
+
+                            </div>
+                            <input type="hidden" value="" id="answer-option-{{ query_set.1.0.getId }}-{{ question.getId }}" name="answer-option-{{ query_set.1.0.getId }}-{{ question.getId }}">
+
+                        {% else %}
+                            <div class="input_div">
+
+                                <input value="" name="answer-{{ query_set.1.0.getId }}-{{ question.getId }}" class="input_elem" type="text">
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
                 {% endfor %}
 
-            {% endfor %}
+                <button type="submit" class="submit-button">Send inn</button>
 
+            </form>
 
         </div>
 
@@ -90,8 +127,6 @@
             <h2>Testcontent 6</h2>
 
         </div>
-
-
 
 
     </div>

@@ -20,6 +20,10 @@ class ChecklistLocal:
 
         return self.name
 
+    def getId(self):
+
+        return self.id
+
 
 
 

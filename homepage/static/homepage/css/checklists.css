@@ -49,3 +49,176 @@
     box-shadow: 3px 3px 10px -2px #000000;
     background-color: rgba(0, 194, 255, 0.10);
 }
+
+.checlists_content_container {
+
+}
+
+.checklist {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.checklist h1 {
+
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+}
+
+.checklist hr {
+
+    border-color: rgba(0, 0, 0, 0.76);
+    border-width: 1px;
+    width: 95%;
+
+}
+
+.checklist .question {
+
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
+
+.checklist .question h3 {
+
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 30px;
+    width: 90%;
+    margin-bottom: 35px;
+}
+
+/*.checklist .question hr {
+
+    width: 50%;
+}*/
+
+
+.checklist .question .options {
+
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+/*.checklist .question .options .option {
+
+    justify-content: center;
+    display: flex;
+    margin: 20px;
+    border-color: rgba(0, 0, 0, 0.75);
+    border-radius: 20%;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 2px 2px 4px -2px #000000;
+}*/
+
+.checklist .question .options .option_button {
+
+    justify-content: center;
+    display: flex;
+    margin: 20px;
+    padding: 7px;
+    font-size: 20px;
+    border-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    outline-width: 0;
+    box-shadow: 2px 2px 4px -2px #000000;
+}
+
+.checklist .question .input_div {
+
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.checklist .question .input_div input[type=text] {
+
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-color: black;
+    border-bottom-width: 1px;
+    outline-width: 0;
+    font-size: 25px;
+    color: rgba(0, 0, 255, 0.65);
+
+    /*box-shadow: 0px 0px 4px 0px #000000;*/
+
+}
+
+.checklist .question .options .option_button:hover {
+
+
+    box-shadow: 3px 3px 10px -2px #000000;
+
+}
+
+.checklist .question .options .option h5 {
+
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.checklist .submit-button {
+
+    box-shadow: 2px 2px 4px -2px #000000;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    border-radius: 8px;
+    border-width: 0.5px;
+    padding: 5px;
+    background-color: rgba(0, 194, 255, 0.30);
+}
+
+.checklist .submit-button:hover {
+
+    box-shadow: 2px 2px 8px -2px #000000;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.core.urlresolvers import resolve
 import datetime
@@ -9,6 +9,7 @@ from .models import Option
 
 from .CustomClasses.ChecklistLocal import ChecklistLocal
 from .CustomClasses.QuestionLocal import QuestionLocal
+from .CustomClasses.OptionLocal import OptionLocal
 
 class IndexView(generic.ListView):
 
@@ -68,22 +69,40 @@ def fetchCheckLists():
 
         for questionK in Question.objects.filter(checkList__pk=checklistK.pk):
 
-            newQuestion = QuestionLocal(questionK.question_text, questionK.isOptions)
+            newQuestion = QuestionLocal(questionK.question_text, questionK.isOptions, questionK.pk)
+            number_options = Option.objects.filter(question__pk=questionK.pk).count()
 
-            if questionK.isOptions:
+            if number_options > 0:
+                newQuestion.setIsOptions(True)
+
+            if questionK.isOptions and newQuestion.getIsOptions():
 
                 for option in Option.objects.filter(question__pk=questionK.pk, question__isOptions=questionK.isOptions):
 
-                    newQuestion.addOption(option.optionText)
+                    newOption = OptionLocal(option.optionText, option.pk)
+                    newQuestion.addOption(newOption)
 
             checklist_1.addQuestion(newQuestion)
 
-
-
-
         all_checklists.append(checklist_1)
-
 
     return all_checklists
 
 
+def sendInChecklist(request):
+
+    checklist_id = request.POST['checklist-id']
+
+    for question in Question.objects.filter(checkList__pk=checklist_id):
+
+        if question.isOptions:
+
+            answer = request.POST['answer-option-' + checklist_id + '-' + str(question.id)]
+            print(answer)
+
+        else:
+            answer = request.POST['answer-' + checklist_id + '-' + str(question.id)]
+
+            print(answer)
+
+    return redirect('homepage:checklists')
