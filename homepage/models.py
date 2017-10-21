@@ -31,25 +31,6 @@ class Option(models.Model):
 
         return self.optionText
 
-
-"""class OptionAnswer(models.Model):
-
-    answer = models.ForeignKey(Option) ## No CASCADE, do not want to delete answer if option is deleted
-    question = models.ForeignKey(Question)
-
-    def __str__(self):
-
-        return self.answer.optionText
-
-class FreeAnswer(models.Model):
-
-    answerText = models.CharField(max_length=500)
-    question = models.ForeignKey(Question)
-
-    def __str__(self):
-
-        return self.answerText"""
-
 class ChecklistAnswer(models.Model):
 
     answer_email = models.EmailField(max_length=200, primary_key=True)
@@ -62,10 +43,18 @@ class Answer(models.Model):
 
     answerText = models.CharField(max_length=500)
     question = models.CharField(max_length=500)
-    answerChecklist = models.ForeignKey(ChecklistAnswer)
+    answerChecklist = models.ForeignKey(ChecklistAnswer, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.answerText
+
+
+
+
+
+
+
+
 
 
 
