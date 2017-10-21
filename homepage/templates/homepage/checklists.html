@@ -7,126 +7,33 @@
     <!--<script src="../../static/homepage/js/scroller.js"></script>
     <input type="hidden" value="350" id="scroll_offset">
     <input type="hidden" value="item_1" id="scroll_point">-->
+    <input type="hidden" id="page_id" value="checklists">
+
 
     <div class="checklists_menu">
 
-        <div class="checklists_menu_item" onclick="clickItem(0)" id="item_1">
+        {% for checklist in query_set.1 %}
 
-            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-            <h2>Liste 1</h2>
+            <div class="checklists_menu_item" onclick="clickItem(this)" id="item-{{ checklist.getId }}">
 
-        </div>
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                <h2>{{ checklist.getName }}</h2>
 
-        <div class="checklists_menu_item" onclick="clickItem(1)" id="item_2">
-             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-             <h2>Liste 2</h2>
-        </div>
+            </div>
 
-        <div class="checklists_menu_item" onclick="clickItem(2)" id="item_3">
-             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-             <h2>Liste 3</h2>
-        </div>
 
-        <div class="checklists_menu_item" onclick="clickItem(3)" id="item_4">
-            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-             <h2>Liste 4</h2>
-         </div>
-
-        <div class="checklists_menu_item" onclick="clickItem(4)" id="item_5">
-            <span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>
-             <h2>Liste 5</h2>
-        </div>
-
-        <div class="checklists_menu_item" onclick="clickItem(5)" id="item_6">
-            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-             <h2>Liste 6</h2>
-        </div>
+        {% endfor %}
 
     </div>
 
 
     <div class="checlists_content_container" id="checlists_content_container">
 
-        <div class="checklist" id="checklist_1">
-            <h1>{{ query_set.1.0.getName }}</h1>
-            <hr>
+        {% for checklist in query_set.1 %}
 
-            <form action="{% url 'homepage:sendChecklist' %}" method="post" enctype="multipart/form-data">
+            {% include 'homepage/checklist.html' %}
 
-                {% csrf_token %}
-
-                <input type="hidden" name="checklist-id" value={{ query_set.1.0.getId }}>
-
-                {% for question in query_set.1.0.getQuestions %}
-
-                    <div class="question">
-
-                        <h3>{{ question.getQuestionText }}</h3>
-
-                        {% if question.isOptions %}
-
-                            <div class="options" onclick="">
-
-                                {% for option in question.getOptions %}
-
-                                    <input id="option-{{ query_set.1.0.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
-                                           name="option-{{ query_set.1.0.getId }}-{{ question.getId }}-{{ option.getId }}" value="{{ option.getOptionText }}"
-                                           type="button" class="option_button">
-
-                                    <!--<div class="option" onclick="">
-                                        <h5>{{ option.getOptionText }}</h5>
-                                    </div> -->
-                                {% endfor %}
-
-                            </div>
-                            <input type="hidden" value="" id="answer-option-{{ query_set.1.0.getId }}-{{ question.getId }}" name="answer-option-{{ query_set.1.0.getId }}-{{ question.getId }}">
-
-                        {% else %}
-                            <div class="input_div">
-
-                                <input value="" name="answer-{{ query_set.1.0.getId }}-{{ question.getId }}" class="input_elem" type="text">
-
-                            </div>
-
-                        {% endif %}
-
-                    </div>
-
-                {% endfor %}
-
-                <button type="submit" class="submit-button">Send inn</button>
-
-            </form>
-
-        </div>
-
-
-        <div class="checklist" id="checklist_2">
-
-            <h2>Testcontent 2</h2>
-        </div>
-
-        <div class="checklist" id="checklist_3">
-
-            <h2>Testcontent 3</h2>
-
-        </div>
-
-        <div class="checklist" id="checklist_4">
-
-            <h2>Testcontent 4</h2>
-        </div>
-
-
-        <div class="checklist" id="checklist_5">
-
-            <h2>Testcontent 5</h2>
-        </div>
-
-        <div class="checklist" id="checklist_6">
-            <h2>Testcontent 6</h2>
-
-        </div>
+        {% endfor %}
 
 
     </div>

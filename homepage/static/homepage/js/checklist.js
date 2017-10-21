@@ -1,12 +1,20 @@
 var body = null;
 var nodes = [];
-var menu_ids = [];
 var node_ids = [];
+var page_id = "";
 
-function clickItem(id) {
+function clickItem(menuItem) {
 
     removeNodes();
-    body.appendChild(nodes[id]);
+
+    var item_id_raw = (menuItem.id).split("-")[1];
+
+    var checklist_id = "checklist-" + item_id_raw;
+    var checklist_index = node_ids.indexOf(checklist_id);
+
+    console.log(item_id_raw);
+    body.appendChild(nodes[checklist_index]);
+
     //nodes[id].scrollTop = nodes[id].scrollHeight;
     var menu_items = document.getElementsByClassName("checklists_menu_item");
     for(i = 0; i < menu_items.length; i++) {
@@ -15,10 +23,10 @@ function clickItem(id) {
         //menu_items[i].style.margin = "0.5%";
 
     }
-    document.getElementById(menu_ids[id]).style.backgroundColor = "#5690aa";
+    document.getElementById(menuItem.id).style.backgroundColor = "#87d4f1";
 
     $('body,html').animate({
-        scrollTop: $('#'+node_ids[id]).offset().top - 50
+        scrollTop: $('#'+checklist_id).offset().top - 50
     }, 1000);
 
 }
@@ -33,6 +41,7 @@ function removeNodes() {
 
 function initView() {
 
+    page_id = document.getElementById("page_id").value;
     body = document.getElementById("checlists_content_container");
 
     var menu_items = document.getElementsByClassName("checklists_menu_item");
@@ -40,23 +49,57 @@ function initView() {
 
     for(i = 0; i < menu_items.length; i++) {
 
-        menu_ids.push(menu_items[i].id);
         node_ids.push(content_items[i].id);
         nodes.push(content_items[i]);
     }
 
     //clickItem(0);
-    removeNodes();
+    if(page_id === "checklists")
+        removeNodes();
 }
 
 window.onload = function() {
 
     initView();
+    if(page_id === "index")
+        setTimeout(scrollDown, 500)
 };
 
 function setValueOnAnswer(object) {
 
     document.getElementById("answer-" + object.id).value=object.value;
-    console.log(document.getElementById("answer-" + object.id).value);
+    var optionDivIdParts = (object.id).split("-");
+    var optionDivId = "options-" + optionDivIdParts[1] + "-" + optionDivIdParts[2];
+    setColorOnButton(optionDivId, object.name);
+
 }
+
+function setColorOnButton(id, optionName) {
+
+    var elements =  document.getElementById(id).childNodes;
+    console.log(elements);
+    for(var i = 0; i < elements.length; i++) {
+
+        if(elements[i].nodeType !== Node.TEXT_NODE) {
+
+            if(elements[i].name === optionName ) {
+
+            elements[i].style.backgroundColor = "#87d4f1";
+            console.log(elements[i].name);
+            } else {
+
+                elements[i].style.backgroundColor = "#FFFFFF";
+            }
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
 

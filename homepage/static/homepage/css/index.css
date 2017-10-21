@@ -144,7 +144,7 @@ body {
 
 }
 
-.checklist_title h1 {
+/*.checklist_title h1 {
 
 
     font-family: Copperplate;
@@ -160,6 +160,12 @@ body {
     justify-content: center;
     flex-direction: column;
     text-align: center;
+}*/
+
+.top_space {
+
+    width: 100%;
+    height: 100px;
 }
 
 .checklist_title hr {

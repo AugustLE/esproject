@@ -16,6 +16,7 @@ function scrollDown() {
 
 window.onload = function() {
 
+    console.log("Test");
     setTimeout(scrollDown, 500);
 
     //scrollDown();

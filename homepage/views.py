@@ -6,6 +6,8 @@ import datetime
 from .models import CheckList
 from .models import Question
 from .models import Option
+from .models import Answer
+from.models import ChecklistAnswer
 
 from .CustomClasses.ChecklistLocal import ChecklistLocal
 from .CustomClasses.QuestionLocal import QuestionLocal
@@ -21,7 +23,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
 
-        return ["Er du GDPR COMPLIANT?"]
+        return ["Er du GDPR COMPLIANT?", [fetchStartChecklist()]]
 
 class AboutView(generic.ListView):
 
@@ -59,32 +61,41 @@ class ChecklistView(generic.ListView):
         return ["Sjekklister", fetchCheckLists()]
 
 
+def fetchStartChecklist():
+
+    return createAndReturnChecklist(CheckList.objects.get(is_front=True))
+
+
+def createAndReturnChecklist(checklistK):
+
+    checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk, checklistK.is_front)
+
+    for questionK in Question.objects.filter(checkList__pk=checklistK.pk):
+
+        new_question = QuestionLocal(questionK.question_text, questionK.isOptions, questionK.pk)
+        number_options = Option.objects.filter(question__pk=questionK.pk).count()
+
+        if number_options > 0:
+            new_question.setIsOptions(True)
+
+        if questionK.isOptions and new_question.getIsOptions():
+
+            for option in Option.objects.filter(question__pk=questionK.pk, question__isOptions=questionK.isOptions):
+                new_option = OptionLocal(option.optionText, option.pk)
+                new_question.addOption(new_option)
+
+        checklist_1.addQuestion(new_question)
+
+    return checklist_1
+
+
 def fetchCheckLists():
 
     all_checklists = []
 
-    for checklistK in CheckList.objects.all():
+    for checklistK in CheckList.objects.filter(is_front=False):
 
-        checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk)
-
-        for questionK in Question.objects.filter(checkList__pk=checklistK.pk):
-
-            newQuestion = QuestionLocal(questionK.question_text, questionK.isOptions, questionK.pk)
-            number_options = Option.objects.filter(question__pk=questionK.pk).count()
-
-            if number_options > 0:
-                newQuestion.setIsOptions(True)
-
-            if questionK.isOptions and newQuestion.getIsOptions():
-
-                for option in Option.objects.filter(question__pk=questionK.pk, question__isOptions=questionK.isOptions):
-
-                    newOption = OptionLocal(option.optionText, option.pk)
-                    newQuestion.addOption(newOption)
-
-            checklist_1.addQuestion(newQuestion)
-
-        all_checklists.append(checklist_1)
+        all_checklists.append(createAndReturnChecklist(checklistK))
 
     return all_checklists
 
@@ -92,17 +103,32 @@ def fetchCheckLists():
 def sendInChecklist(request):
 
     checklist_id = request.POST['checklist-id']
+    is_front = request.POST['is_front']
+    email = request.POST['email_sender']
 
+    answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
+    answer_checklist.save()
     for question in Question.objects.filter(checkList__pk=checklist_id):
 
         if question.isOptions:
 
             answer = request.POST['answer-option-' + checklist_id + '-' + str(question.id)]
-            print(answer)
+
+            db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
+            db_answer.save()
+
 
         else:
             answer = request.POST['answer-' + checklist_id + '-' + str(question.id)]
 
-            print(answer)
+            db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
+            db_answer.save()
 
-    return redirect('homepage:checklists')
+
+
+
+    if is_front == "True":
+        return redirect('homepage:index')
+    else:
+
+        return redirect('homepage:checklists')

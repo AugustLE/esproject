@@ -1,1 +1,68 @@
 
+<div class="checklist" id="checklist-{{ checklist.getId }}">
+
+    <p class="checklistTitle">{{ checklist.getName }}</p>
+    <hr>
+
+    <form action="{% url 'homepage:sendChecklist' %}" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="checklist-id" value="{{ checklist.getId }}">
+        <input type="hidden" name="is_front" value="{{ checklist.getIsFront }}">
+
+        {% for question in checklist.getQuestions %}
+
+            <div class="question">
+
+                <h3 class="questionText">{{ question.getQuestionText }}</h3>
+
+                {% if question.isOptions %}
+
+                    <div id="options-{{ checklist.getId }}-{{ question.getId }}" class="options" onclick="">
+
+                        {% for option in question.getOptions %}
+
+                            <input id="option-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
+                                   name="option-{{ checklist.getId }}-{{ question.getId }}-{{ option.getId }}" value="{{ option.getOptionText }}"
+                                   type="button" class="option_button">
+
+                        {% endfor %}
+
+                    </div>
+                    <input type="hidden" value="" id="answer-option-{{ checklist.getId }}-{{ question.getId }}" name="answer-option-{{ checklist.getId }}-{{ question.getId }}">
+
+                {% else %}
+                    <div class="input_div">
+
+                        <input value="" name="answer-{{ checklist.getId }}-{{ question.getId }}" class="input_elem" type="text">
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+        <div class="checklist_end">
+
+            <div class="question">
+
+                <h3 class="questionText">Din epost:</h3>
+
+                <div class="input_div">
+
+                    <input name="email_sender" class="input_elem" type="email">
+
+                </div>
+
+            </div>
+
+        <button type="submit" class="submit-button">Send inn</button>
+
+        </div>
+
+    </form>
+
+</div>

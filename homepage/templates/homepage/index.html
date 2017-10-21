@@ -7,30 +7,23 @@
     {% include 'homepage/top-image-container.html' %}
     <script src="../../static/homepage/js/index.js"></script>
     <script src="../../static/homepage/js/scroller.js"></script>
-    <input type="hidden" value="75" id="scroll_offset">
-    <input type="hidden" value="checklist_title" id="scroll_point">
+    <script src="../../static/homepage/js/checklist.js"></script>
+    <input type="hidden" value="150" id="scroll_offset">
+    <input type="hidden" value="checlists_content_container" id="scroll_point">
 
-    <div class="checklist_title" id="checklist_title">
+    <input type="hidden" id="page_id" value="index">
 
-        <h1>Sjekkliste</h1>
-        <hr>
+    <div class="top_space">
+
     </div>
 
-    <br>
-    <div id="checklist" class="typeform-widget" data-url="https://adall.typeform.com/to/N41azB" style="width: 100%; height: 300px; z-index: -1;transition: all .3s linear; margin-left: 5%;">
-    </div>
-    <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement,
-        gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script");
-        js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })()
-    </script>
-    <div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 1; padding-top: 5px;" > powered by
-        <a href="https://www.typeform.com/examples/?utm_campaign=N41azB&amp;utm_source=typeform.com-5371058-Pro&amp;utm_medium=typeform&amp;utm_content=typeform-embedded-poweredbytypeform&amp;utm_term=NO"
-           style="color: #999" target="_blank">Typeform
-        </a>
-    </div>
+    <div class="checlists_content_container" id="checlists_content_container">
 
-    <br>
-    <hr style="border-color: #555555; border-width: 0.5px">
+        {% for checklist in query_set.1 %}
+
+            {% include 'homepage/checklist.html' %}
+        {% endfor %}
+    </div>
 
 
 {% endblock %}

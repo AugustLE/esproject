@@ -1,5 +1,5 @@
 
-function resizeHeaderOnScroll() {
+/*function resizeHeaderOnScroll() {
 
   var distanceY = window.pageYOffset || document.documentElement.scrollTop,
   shrinkOn = 60;
@@ -43,4 +43,4 @@ window.onload = function() {
     checkWidth();
 
 
-};
+};*/

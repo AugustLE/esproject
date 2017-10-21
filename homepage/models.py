@@ -4,7 +4,8 @@ from django.db import models
 
 class CheckList(models.Model):
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
+    is_front = models.BooleanField(default=False)
 
     def __str__(self):
 
@@ -31,9 +32,10 @@ class Option(models.Model):
         return self.optionText
 
 
-class OptionAnswer(models.Model):
+"""class OptionAnswer(models.Model):
 
     answer = models.ForeignKey(Option) ## No CASCADE, do not want to delete answer if option is deleted
+    question = models.ForeignKey(Question)
 
     def __str__(self):
 
@@ -42,11 +44,31 @@ class OptionAnswer(models.Model):
 class FreeAnswer(models.Model):
 
     answerText = models.CharField(max_length=500)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question)
 
     def __str__(self):
 
+        return self.answerText"""
+
+class ChecklistAnswer(models.Model):
+
+    answer_email = models.EmailField(max_length=200, primary_key=True)
+    checklist = models.ForeignKey(CheckList)
+
+    def __str__(self):
+        return self.answer_email
+
+class Answer(models.Model):
+
+    answerText = models.CharField(max_length=500)
+    question = models.CharField(max_length=500)
+    answerChecklist = models.ForeignKey(ChecklistAnswer)
+
+    def __str__(self):
         return self.answerText
+
+
+
 
 
 
