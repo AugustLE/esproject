@@ -116,7 +116,6 @@ def sendInChecklist(request):
     checklist_id = request.POST['checklist-id']
     is_front = request.POST['is_front']
     email = request.POST['email_sender']
-
     is_filled = True
 
     answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
@@ -133,7 +132,6 @@ def sendInChecklist(request):
 
         db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
         db_answer.save()
-
 
     if not is_filled:
         ChecklistAnswer.objects.get(answer_email=email).delete()

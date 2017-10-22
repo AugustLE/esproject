@@ -142,10 +142,56 @@ function setColorOnButton(id, optionName) {
 
 }
 
-function checkForm() {
 
-    console.log("Test");
-    //return false;
+function checkForm(object) {
+
+    var checklist_id = object.id.split("-")[1];
+    var checklist = document.getElementById("checklist-" + checklist_id);
+
+    //return !!checkAnswers(checklist);
+
+    if(checkAnswers(checklist)) {
+
+        return true;
+    }
+
+    //$('#not_filled_modal').modal('toggle');
+    $('#not_filled_modal').modal('show');
+    return false;
+}
+
+function valueIsEmpty(classname, question) {
+
+    var checkValue = question.querySelector(classname).value;
+    return checkValue === "" || checkValue.trim() === "";
+
+}
+
+function checkAnswers(checklist) {
+
+    var questions = checklist.getElementsByClassName("question");
+    var is_filled = true;
+    for(var i = 0; i < questions.length; i++) {
+
+        var is_options = questions[i].querySelector(".isOptions").value;
+        console.log(is_options);
+        if(is_options === "True") {
+
+            if(valueIsEmpty(".answerOption", questions[i])) {
+                is_filled = false;
+                break;
+            }
+
+        } else {
+
+            if(valueIsEmpty(".input_elem", questions[i])) {
+                console.log(questions[i]);
+                is_filled = false;
+                break;
+            }
+        }
+    }
+    return is_filled;
 }
 
 
