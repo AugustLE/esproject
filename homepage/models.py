@@ -1,5 +1,6 @@
 from django.db import models
-
+from datetime import datetime
+from django.utils import timezone
 # Create your models here.
 
 class CheckList(models.Model):
@@ -35,6 +36,7 @@ class ChecklistAnswer(models.Model):
 
     answer_email = models.EmailField(max_length=200, primary_key=True)
     checklist = models.ForeignKey(CheckList)
+    date_sent = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.answer_email

@@ -1,9 +1,11 @@
 
 <div class="checklist" id="checklist-{{ checklist.getId }}">
 
-    <p class="checklistTitle">{{ checklist.getName }}</p>
-    <hr>
+    <div class="titleContainer">
 
+        <p class="checklistTitle">{{ checklist.getName }}</p>
+        <hr>
+    </div>
     <form action="{% url 'homepage:sendChecklist' %}" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
@@ -13,7 +15,7 @@
 
         {% for question in checklist.getQuestions %}
 
-            <div class="question">
+            <div id="question-{{ checklist.getId }}-{{ question.getId }}" class="question">
 
                 <h3 class="questionText">{{ question.getQuestionText }}</h3>
 
@@ -35,7 +37,7 @@
                 {% else %}
                     <div class="input_div">
 
-                        <input value="" name="answer-{{ checklist.getId }}-{{ question.getId }}" class="input_elem" type="text">
+                        <input id="answer-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)" value="" name="answer-{{ checklist.getId }}-{{ question.getId }}" class="input_elem" type="text" required>
 
                     </div>
 
@@ -47,19 +49,17 @@
 
         <div class="checklist_end">
 
-            <div class="question">
-
-                <h3 class="questionText">Din epost:</h3>
+            <div class="question_end">
 
                 <div class="input_div">
 
-                    <input name="email_sender" class="input_elem" type="email">
+                    <input placeholder="DIN EPOST" class="input_email" name="email_sender" type="email" required>
 
                 </div>
 
             </div>
 
-        <button type="submit" class="submit-button">Send inn</button>
+        <button onclick="return checkForm()" type="submit" class="submit-button"><span style="font-size: 25px;padding-top: 8px;" class="glyphicon glyphicon-send" aria-hidden="true"></span>&nbsp; Send inn</button>
 
         </div>
 

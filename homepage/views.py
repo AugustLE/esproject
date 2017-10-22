@@ -60,6 +60,17 @@ class ChecklistView(generic.ListView):
 
         return ["Sjekklister", fetchCheckLists()]
 
+class ConfirmationView(generic.ListView):
+
+    model = None
+    template_name = 'homepage/confirmation.html'
+    id = 4
+    context_object_name = 'query_set'
+
+    def get_queryset(self):
+
+        return ['Takk for ditt svar']
+
 
 def fetchStartChecklist():
 
@@ -106,29 +117,28 @@ def sendInChecklist(request):
     is_front = request.POST['is_front']
     email = request.POST['email_sender']
 
+    is_filled = True
+
     answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
     answer_checklist.save()
     for question in Question.objects.filter(checkList__pk=checklist_id):
 
         if question.isOptions:
-
             answer = request.POST['answer-option-' + checklist_id + '-' + str(question.id)]
-
-            db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
-            db_answer.save()
-
-
         else:
             answer = request.POST['answer-' + checklist_id + '-' + str(question.id)]
 
-            db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
-            db_answer.save()
+        if answer == "":
+            is_filled = False
+
+        db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
+        db_answer.save()
 
 
+    if not is_filled:
+        ChecklistAnswer.objects.get(answer_email=email).delete()
 
 
-    if is_front == "True":
-        return redirect('homepage:index')
-    else:
+    return redirect('homepage:confirmation', email)
 
-        return redirect('homepage:checklists')
+

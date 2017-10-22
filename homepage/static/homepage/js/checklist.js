@@ -26,7 +26,7 @@ function clickItem(menuItem) {
     document.getElementById(menuItem.id).style.backgroundColor = "#87d4f1";
 
     $('body,html').animate({
-        scrollTop: $('#'+checklist_id).offset().top - 50
+        scrollTop: $('#'+checklist_id).offset().top - 75
     }, 1000);
 
 }
@@ -38,6 +38,15 @@ function removeNodes() {
         body.removeChild(body.lastChild);
     }
 }
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode === 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
 
 function initView() {
 
@@ -62,22 +71,61 @@ window.onload = function() {
 
     initView();
     if(page_id === "index")
-        setTimeout(scrollDown, 500)
+        setTimeout(scrollDown, 250)
 };
+
 
 function setValueOnAnswer(object) {
 
-    document.getElementById("answer-" + object.id).value=object.value;
-    var optionDivIdParts = (object.id).split("-");
-    var optionDivId = "options-" + optionDivIdParts[1] + "-" + optionDivIdParts[2];
-    setColorOnButton(optionDivId, object.name);
+    console.log(object.className);
+    if(object.className === "option_button") {
+
+        document.getElementById("answer-" + object.id).value=object.value;
+        var optionDivIdParts = (object.id).split("-");
+        var optionDivId = "options-" + optionDivIdParts[1] + "-" + optionDivIdParts[2];
+        setColorOnButton(optionDivId, object.name);
+        scrollToNext(object);
+    } else if(object.className === "input_elem") {
+
+        $("#" + object.id).keyup(function(event){
+            if(event.keyCode === 13){
+
+                scrollToNext(object);
+
+            }
+        });
+    }
+}
+
+function scrollToNext(object) {
+
+    var checklist_id = object.id.split("-")[1];
+    var question_id = "question-" + object.id.split("-")[1] + "-" + object.id.split("-")[2];
+
+    var checklist = document.getElementById("checklist-" + checklist_id);
+    var questions = checklist.getElementsByClassName("question");
+
+    for(var i = 0; i < questions.length; i++) {
+
+        if(questions[i].id === question_id) {
+
+            if(i + 1 < questions.length) {
+
+                document.getElementById(questions[i + 1].id).focus();
+                $('body,html').animate({
+                    scrollTop: $('#'+questions[i + 1].id).offset().top - 50
+                }, 500);
+                break;
+
+            }
+        }
+    }
 
 }
 
 function setColorOnButton(id, optionName) {
 
-    var elements =  document.getElementById(id).childNodes;
-    console.log(elements);
+    var elements = document.getElementById(id).childNodes;
     for(var i = 0; i < elements.length; i++) {
 
         if(elements[i].nodeType !== Node.TEXT_NODE) {
@@ -85,7 +133,6 @@ function setColorOnButton(id, optionName) {
             if(elements[i].name === optionName ) {
 
             elements[i].style.backgroundColor = "#87d4f1";
-            console.log(elements[i].name);
             } else {
 
                 elements[i].style.backgroundColor = "#FFFFFF";
@@ -93,7 +140,12 @@ function setColorOnButton(id, optionName) {
         }
     }
 
+}
 
+function checkForm() {
+
+    console.log("Test");
+    //return false;
 }
 
 
