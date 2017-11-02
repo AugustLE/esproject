@@ -6,7 +6,6 @@ from .models import Answer
 from .models import ChecklistAnswer
 
 # Register your models here.
-admin.site.register(Option)
 admin.site.register(Answer)
 
 

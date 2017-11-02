@@ -12,5 +12,8 @@ urlpatterns = [
     url(r'^checklists/$', views.ChecklistView.as_view(), name='checklists'),
     url(r'^confirmation/(?P<anystring>.+)/$', views.ConfirmationView.as_view(), name='confirmation'),
     url(r'^sendChecklist/$', views.sendInChecklist, name='sendChecklist'),
+    url(r'^login/$', views.UserLoginFormView.as_view(), name='login'),
+    url(r'^signup/$', views.UserSignupFormView.as_view(), name='signup'),
+    url(r'^logout/$', views.logoutUser, name='logout'),
 
 ]

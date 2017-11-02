@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.views import generic
+from django.contrib.auth import authenticate, login, logout
+from django.views.generic import View
 from django.core.urlresolvers import resolve
 import datetime
+from .forms import UserLoginForm, UserSignupForm
 
 from .models import CheckList
 from .models import Question
@@ -72,6 +75,69 @@ class ConfirmationView(generic.ListView):
         return ['Takk for ditt svar']
 
 
+class UserLoginFormView(View):
+
+    form_class = UserLoginForm
+    template_name = 'homepage/login.html'
+
+    #display a blank form
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+
+    #process form data
+    #loggs in the user
+    def post(self, request):
+
+        email = request.POST['email']
+        password = request.POST['password']
+        form = self.form_class(request.POST)
+        user = authenticate(email=email, password=password)
+
+        if user is not None:
+
+            if user.is_active:# and user.is_staff:
+
+                login(request, user)
+                return redirect('homepage:index')
+        message = "Feil ved innlogging: Brukeren eksisterer ikke"
+        return render(request, self.template_name, {'form': form, 'val_error':message},)
+
+
+def logoutUser(request):
+
+    logout(request)
+    return redirect('homepage:index')
+
+class UserSignupFormView(View):
+
+    form_class = UserSignupForm
+    template_name = 'homepage/signup.html'
+
+    def post(self, request):
+        print("TRY 1111111111111111111111")
+
+        form = self.form_class(request.POST)
+        print("TRY 2222222222222222")
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('email') #request.POST['email']
+            password = form.cleaned_data.get('password1') #request.POST['password']
+            user = authenticate(email=email, password=password)
+            login(request, user)
+            return redirect('homepage:index')
+        message = "Feil ved registrering"
+        return render(request, self.template_name, {'form': form, 'val_error': message,})
+
+    def get(self, request):
+
+        form = form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+
+
+
 def fetchStartChecklist():
 
     return createAndReturnChecklist(CheckList.objects.get(is_front=True))
@@ -81,7 +147,7 @@ def createAndReturnChecklist(checklistK):
 
     checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk, checklistK.is_front)
 
-    for questionK in Question.objects.filter(checkList__pk=checklistK.pk):
+    for questionK in Question.objects.filter(checkList__pk=checklistK.pk).order_by('priority'):
 
         new_question = QuestionLocal(questionK.question_text, questionK.isOptions, questionK.pk)
         number_options = Option.objects.filter(question__pk=questionK.pk).count()
@@ -118,9 +184,17 @@ def sendInChecklist(request):
     email = request.POST['email_sender']
     is_filled = True
 
+    if ChecklistAnswer.objects.filter(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id))).count() > 0:
+        return render_to_response('homepage/confirmation.html',
+                                  {'query_set': ['Du har allerede svart her'], 'id': 5})
+
     answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
     answer_checklist.save()
+
+    answers = []
+
     for question in Question.objects.filter(checkList__pk=checklist_id):
+
 
         if question.isOptions:
             answer = request.POST['answer-option-' + checklist_id + '-' + str(question.id)]
@@ -130,13 +204,18 @@ def sendInChecklist(request):
         if answer == "":
             is_filled = False
 
+        answers.append([question.question_text, answer])
+
         db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
         db_answer.save()
 
     if not is_filled:
         ChecklistAnswer.objects.get(answer_email=email).delete()
 
+    message = 'Takk for ditt svar!'
 
-    return redirect('homepage:confirmation', email)
+
+    return render_to_response('homepage/confirmation.html', {'query_set':[message], 'id':4, 'answers':answers})
+    #return render(request, 'homepage/confirmation.html', {})
 
 

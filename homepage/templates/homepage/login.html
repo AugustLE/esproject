@@ -1,0 +1,43 @@
+{% extends 'homepage/base.html' %}
+
+{% block content %}
+
+
+    <div class="login-body">
+
+        <h2>Logg inn</h2>
+        <div class="login-content">
+
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+
+            {% elif val_error %}
+                <p style="color: red"><strong>{{ val_error }}</strong></p>
+            {% endif %}
+
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {%  include 'homepage/login-template.html' %}
+
+                <div class="login-submit">
+
+                    <button type="submit" class="submit-button">Logg inn</button>
+
+                </div>
+
+            </form>
+
+            <div class="register-user-text">
+
+                <a href="{% url 'homepage:signup' %}">Ingen bruker? Registrer deg her</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

@@ -65,6 +65,35 @@
 
                             </li>
 
+                            {% if user.is_authenticated %}
+
+                                <li>
+                                    <a href="{% url 'homepage:logout' %}" id="navigasjons_bar"
+
+                                        {% if view.id == 3 %}
+                                            class="active"
+                                        {% endif %} >
+
+                                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
+                                    </a>
+
+                                </li>
+
+                            {% else %}
+
+                                <li>
+                                    <a href="{% url 'homepage:login' %}" id="navigasjons_bar"
+
+                                        {% if view.id == 3 %}
+                                            class="active"
+                                        {% endif %} >
+
+                                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logg inn
+                                    </a>
+
+                                </li>
+
+                            {% endif %}
                             &nbsp;
                             &nbsp;
 
@@ -87,5 +116,46 @@
 
     {% endblock %}
 
+    <div class="footer_body">
+
+        <div class="footer_title">
+            <img src="../../static/homepage/images/Logo_2-2.svg">
+
+        </div>
+
+        <div class="footer_mid">
+
+            <div class="footer_field">
+
+                <p>
+                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                    Professor Brochs Gate 3, 7030 Trondheim
+                </p>
+            </div>
+
+            <div class="footer_field">
+
+                <p>
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    augustle.lund@hotmail.com
+                </p>
+            </div>
+
+            <div class="footer_field">
+
+
+                <p>
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                    +47 90628109
+                </p>
+            </div>
+
+        </div>
+
+        <div class="footer_footer">
+            <hr class="footer_title_underline">
+        </div>
+
+    </div>
 
 {% endblock %}

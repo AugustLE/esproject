@@ -27,12 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['46.101.61.74', '127.0.0.1', '192.168.20.7']
 
-
+AUTH_USER_MODEL = 'user.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
 
     'homepage',
+    'user',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

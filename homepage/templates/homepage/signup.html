@@ -1,0 +1,51 @@
+{% extends 'homepage/base.html' %}
+
+{% block content %}
+
+    <div class="login-body">
+        <h2>Registrer</h2>
+        <div class="login-content">
+
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+
+            {% elif val_error %}
+                <p style="color: red"><strong>{{ val_error }}</strong></p>
+            {% endif %}
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {% for field in form %}
+
+                    <div class="login-field-container">
+
+                        <div class="login-error-field">
+                            <span class="text-danger small">
+                                {{ field.errors }}
+                                {% if field.help_text %}
+                                  <small style="color: grey">{{ field.help_text }}</small>
+                                {% endif %}
+
+                            </span>
+                        </div>
+
+                        <label class="label-tag">{{ field.label_tag }}</label>
+                        <div class="login-field">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="login-submit">
+
+                    <button type="submit" class="submit-button">Registrer</button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}

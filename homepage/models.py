@@ -17,6 +17,7 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     checkList = models.ForeignKey(CheckList, on_delete=models.CASCADE)
     isOptions = models.BooleanField(default=True)
+    priority = models.CharField(max_length=3, unique=False, default='0')
 
     def __str__(self):
 
@@ -49,18 +50,4 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answerText
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
