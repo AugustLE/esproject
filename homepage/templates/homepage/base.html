@@ -70,7 +70,7 @@
                                 <li>
                                     <a href="{% url 'homepage:logout' %}" id="navigasjons_bar"
 
-                                        {% if view.id == 3 %}
+                                        {% if view.id == 5 %}
                                             class="active"
                                         {% endif %} >
 
@@ -82,11 +82,7 @@
                             {% else %}
 
                                 <li>
-                                    <a href="{% url 'homepage:login' %}" id="navigasjons_bar"
-
-                                        {% if view.id == 3 %}
-                                            class="active"
-                                        {% endif %} >
+                                    <a href="{% url 'homepage:login' %}" id="navigasjons_bar">
 
                                         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logg inn
                                     </a>
@@ -96,7 +92,6 @@
                             {% endif %}
                             &nbsp;
                             &nbsp;
-
 
                         </ul>
 

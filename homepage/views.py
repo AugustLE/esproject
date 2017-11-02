@@ -79,11 +79,11 @@ class UserLoginFormView(View):
 
     form_class = UserLoginForm
     template_name = 'homepage/login.html'
-
+    id = 5
     #display a blank form
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'view_id':5})
 
 
     #process form data
