@@ -2,13 +2,11 @@
 
 {% block base %}
 
-
     <body>
 
         <div class="top-container">
-
-
-            <nav class="navbar navbar-light navbar-fixed-top">
+            <!-- class="navbar navbar-light navbar-fixed-top"  -->
+            <nav style="position: fixed; width: 100%; top: 0; padding-top: 15px; background-color: white; z-index: 10;" class="navbar-collapse" role="navigation">
 
                 <div class="container-fluid">
 
@@ -21,7 +19,7 @@
 
                         </button>
                         <a id="company_header" class="navbar-brand" href={% url 'homepage:index' %}>
-                            <img id="company_header" src="../../static/homepage/images/Logo_2-2.svg">
+                            <img id="company_header" src="../../static/homepage/images/logo_oval.svg">
 
                         </a>
 
@@ -67,22 +65,38 @@
 
                             {% if user.is_authenticated %}
 
-                                <li>
-                                    <a href="{% url 'homepage:logout' %}" id="navigasjons_bar"
-
-                                        {% if view.id == 5 %}
-                                            class="active"
-                                        {% endif %} >
-
-                                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
-                                    </a>
-
+                                <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profil <b class="caret"></b>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{% url 'userprofile:profile' %}">
+                                            <span style="font-size: 11px;" class="glyphicon glyphicon-user" aria-hidden="true"></span> Din profil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'userprofile:checklists' %}">
+                                            <span style="font-size: 11px" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Dine sjekklister
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url 'homepage:logout' %}" id="navigasjons_bar">
+                                           <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
+                                        </a>
+                                    </li>
+                                  </ul>
                                 </li>
 
                             {% else %}
 
                                 <li>
-                                    <a href="{% url 'homepage:login' %}" id="navigasjons_bar">
+                                    <a href="{% url 'homepage:login' %}" id="navigasjons_bar"
+
+                                        {% if view_id == 5 %}
+                                            class="active"
+                                        {% endif %} >
 
                                         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logg inn
                                     </a>
@@ -111,46 +125,6 @@
 
     {% endblock %}
 
-    <div class="footer_body">
-
-        <div class="footer_title">
-            <img src="../../static/homepage/images/Logo_2-2.svg">
-
-        </div>
-
-        <div class="footer_mid">
-
-            <div class="footer_field">
-
-                <p>
-                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                    Professor Brochs Gate 3, 7030 Trondheim
-                </p>
-            </div>
-
-            <div class="footer_field">
-
-                <p>
-                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    augustle.lund@hotmail.com
-                </p>
-            </div>
-
-            <div class="footer_field">
-
-
-                <p>
-                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                    +47 90628109
-                </p>
-            </div>
-
-        </div>
-
-        <div class="footer_footer">
-            <hr class="footer_title_underline">
-        </div>
-
-    </div>
+    {% include 'homepage/footer.html' %}
 
 {% endblock %}
