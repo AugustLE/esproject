@@ -2,5 +2,54 @@
 
 {% block content %}
 
-    <h2 style="margin-top: 400px;">Testcontent checklist</h2>
+    <script src="../../static/userprofile/js/checklistAnswer.js"></script>
+    <input type="hidden" id="page_id" value="answers">
+    <div class="user-checklists-body">
+
+        <div style="margin-top: 150px;" class="checklists_menu">
+
+            {% if query_set.0 %}
+
+                {% for checklist in query_set.0 %}
+
+                    <div class="checklists_menu_item" onclick="clickItem(this)" id="item-{{ checklist.id }}">
+
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                        <h2>{{ checklist.checklist.name }}</h2>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <h2 style="margin-bottom: 150px;">Du har ikke svart på noen lister</h2>
+
+            {% endif %}
+
+        </div>
+
+        <div class="answers_content_container" id="answers_content_container">
+
+            {% for checklist_answer in query_set.1 %}
+
+                <div style="margin-top: 0px;" class="answer_body" id="answer-{{ checklist_answer.0.answerChecklist.pk }}">
+
+                    <h1 class="answer_title">Dine svar:</h1>
+
+                    {% for answer in checklist_answer %}
+
+                        <div class="answer_container">
+
+                            <h2 class="answer_question">{{ answer.question }}</h2>
+                            <h4 class="answer_answer">{{ answer.answerText }}</h4>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

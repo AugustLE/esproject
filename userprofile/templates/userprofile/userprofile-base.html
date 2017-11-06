@@ -2,6 +2,11 @@
 
 {% block base %}
 
+    {% if not user.is_authenticated %}
+
+        <meta http-equiv="refresh" content="0; url={% url 'homepage:index' %}" />
+
+    {% endif %}
 
     <body>
 
@@ -26,23 +31,25 @@
                         <ul class="nav navbar-nav navbar-left">
 
                             <li>
-                                <a href="{% url 'homepage:logout' %}">
+                                <a href="{% url 'homepage:index' %}">
 
-                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
+                                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Hjem
+
                                 </a>
                             </li>
+
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
 
                             <li>
                                 <a href="{% url 'userprofile:profile' %}"
-                                    {% if view.id == 0 %}
+                                    {% if view_id == 0 %}
                                         class="active"
 
                                     {% endif %}>
 
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Din profil
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Min profil
 
                                 </a>
                             </li>
@@ -54,15 +61,14 @@
                                         class="active"
                                     {% endif %} >
 
-                                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Dine sjekklister
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Mine sjekklister
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{% url 'homepage:index' %}">
+                                <a href="{% url 'homepage:logout' %}">
 
-                                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Hjem
-
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
                                 </a>
                             </li>
                             &nbsp;

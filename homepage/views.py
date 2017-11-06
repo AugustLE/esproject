@@ -83,7 +83,7 @@ class UserLoginFormView(View):
     #display a blank form
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {'form': form, 'view_id':5})
+        return render(request, self.template_name, {'form': form, 'view_id': 5})
 
 
     #process form data
@@ -116,10 +116,9 @@ class UserSignupFormView(View):
     template_name = 'homepage/signup.html'
 
     def post(self, request):
-        print("TRY 1111111111111111111111")
 
         form = self.form_class(request.POST)
-        print("TRY 2222222222222222")
+
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email') #request.POST['email']
@@ -140,7 +139,11 @@ class UserSignupFormView(View):
 
 def fetchStartChecklist():
 
-    return createAndReturnChecklist(CheckList.objects.get(is_front=True))
+    if CheckList.objects.filter(is_front=True).count() > 0:
+        return createAndReturnChecklist(CheckList.objects.get(is_front=True))
+
+    return None
+
 
 
 def createAndReturnChecklist(checklistK):
@@ -181,12 +184,16 @@ def sendInChecklist(request):
 
     checklist_id = request.POST['checklist-id']
     is_front = request.POST['is_front']
-    email = request.POST['email_sender']
+
+    if request.user.is_authenticated:
+        email = request.user.email
+    else:
+        email = request.POST['email_sender']
     is_filled = True
 
     if ChecklistAnswer.objects.filter(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id))).count() > 0:
-        return render_to_response('homepage/confirmation.html',
-                                  {'query_set': ['Du har allerede svart her'], 'id': 5})
+        return render(request,'homepage/confirmation.html',
+                                  {'query_set': ['Du har allerede svart på denne listen'], 'id': 5})
 
     answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
     answer_checklist.save()
@@ -212,10 +219,9 @@ def sendInChecklist(request):
     if not is_filled:
         ChecklistAnswer.objects.get(answer_email=email).delete()
 
-    message = 'Takk for ditt svar!'
+    message = 'Takk for dine svar!'
 
-
-    return render_to_response('homepage/confirmation.html', {'query_set':[message], 'id':4, 'answers':answers})
+    return render(request, 'homepage/confirmation.html', {'query_set':[message], 'id':4, 'answers': answers,})
     #return render(request, 'homepage/confirmation.html', {})
 
 

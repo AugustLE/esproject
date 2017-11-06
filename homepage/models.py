@@ -35,12 +35,12 @@ class Option(models.Model):
 
 class ChecklistAnswer(models.Model):
 
-    answer_email = models.EmailField(max_length=200, primary_key=True)
+    answer_email = models.EmailField(max_length=200)
     checklist = models.ForeignKey(CheckList)
     date_sent = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.answer_email
+        return self.answer_email + " - " + self.checklist.name
 
 class Answer(models.Model):
 

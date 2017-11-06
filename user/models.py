@@ -38,6 +38,7 @@ class CustomUser(AbstractBaseUser):
     last_name = models.CharField(verbose_name='last name', max_length=40, blank=True)
     phone = models.CharField(verbose_name='phone', max_length=8, blank=True)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+    company_name = models.CharField(verbose_name="company name", max_length=100, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -49,6 +50,9 @@ class CustomUser(AbstractBaseUser):
 
     def get_email(self):
         return self.email
+
+    def get_company_name(self):
+        return self.company_name
 
     def get_short_name(self):
         # The user is identified by their email address

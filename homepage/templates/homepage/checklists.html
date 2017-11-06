@@ -26,7 +26,6 @@
 
     </div>
 
-
     <div class="checlists_content_container" id="checlists_content_container">
 
         {% for checklist in query_set.1 %}
@@ -34,8 +33,8 @@
             {% include 'homepage/checklist.html' %}
 
         {% endfor %}
-
     </div>
+
     {% include 'homepage/not-filled-modal.html' %}
 
 {% endblock %}

@@ -1,0 +1,12 @@
+
+.user-checklists-body {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.answer_body {
+
+    margin-top: 0;
+}

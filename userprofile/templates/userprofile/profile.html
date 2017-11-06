@@ -2,5 +2,116 @@
 
 {% block content %}
 
-    <h2 style="margin-top: 400px;">Testcontent profile</h2>
+    <input type="hidden" id="val_error" value="{{ val_error }}">
+    <script src="../../static/userprofile/js/profile.js"></script>
+    <div class="profile-body" id="profile_body">
+
+        <div class="profile-top">
+
+            <h1 class="profile-title" id="profile_title">Din profil</h1>
+            <hr/>
+        </div>
+
+        <div class="profile-mid" id="profile" onclick="showEditProfile()">
+
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <div class="field-container">
+
+                <p class="thick">Epost:</p>
+                {% if user.email %}
+                    <p class="email-text">{{  user.email }}</p>
+                {% else %}
+                     <p class="not-reg">Ikke registrert</p>
+                {% endif %}
+            </div>
+            <div class="field-container">
+
+                <p class="thick">Navn på selskap:</p>
+                {% if user.company_name %}
+                    <p>{{  user.company_name}}</p>
+                {% else %}
+                     <p class="not-reg">Ikke registrert</p>
+                {% endif %}
+            </div>
+            <div class="field-container">
+                <p class="thick">Telefon:</p>
+                {% if user.phone %}
+                    <p>{{  user.phone }}</p>
+                {% else %}
+                     <p class="not-reg">Ikke registrert</p>
+                {% endif %}
+            </div>
+            <div class="field-container">
+                <p class="thick">Fornavn:</p>
+                {% if user.first_name %}
+                    <p>{{  user.first_name }}</p>
+                {% else %}
+                     <p class="not-reg">Ikke registrert</p>
+                {% endif %}
+            </div>
+            <div class="field-container">
+                <p class="thick">Etternavn:</p>
+                {% if user.last_name %}
+                    <p>{{  user.last_name }}</p>
+                {% else %}
+                     <p class="not-reg">Ikke registrert</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="profile-edit" id="profile_edit">
+
+            <div style="margin-top: 0;" class="login-body">
+
+                <button id="remove_edit" onclick="showProfile()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+
+                <div class="login-content">
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+
+                    {% elif val_error %}
+                        <p style="color: red"><strong>{{ val_error }}</strong></p>
+                    {% endif %}
+
+                    <form action="" method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        {% for field in form %}
+
+                            <div class="login-field-container">
+
+                                <div class="login-error-field">
+                                    <span class="text-danger small">
+
+                                        {% if field.help_text %}
+                                          <small style="color: grey">{{ field.help_text }}</small>
+                                        {% endif %}
+
+                                    </span>
+                                </div>
+
+                                <label class="label-tag">{{ field.label_tag }}</label>
+                                <div class="login-field">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="login-submit">
+
+                            <button type="submit" class="submit-button">Lagre</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}

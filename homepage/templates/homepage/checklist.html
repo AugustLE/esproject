@@ -1,71 +1,75 @@
 
-<div class="checklist" id="checklist-{{ checklist.getId }}">
+{% if checklist %}
+    <div class="checklist" id="checklist-{{ checklist.getId }}">
 
-    <div class="titleContainer">
+        <div class="titleContainer">
 
-        <p class="checklistTitle">{{ checklist.getName }}</p>
-        <hr>
-    </div>
-    <form id="submit-{{ checklist.getId }}" onsubmit="return checkForm(this)" action="{% url 'homepage:sendChecklist' %}" method="post" enctype="multipart/form-data">
+            <p class="checklistTitle">{{ checklist.getName }}</p>
+            <hr>
+        </div>
+        <form id="submit-{{ checklist.getId }}" onsubmit="return checkForm(this)" action="{% url 'homepage:sendChecklist' %}" method="post" enctype="multipart/form-data">
 
-        {% csrf_token %}
+            {% csrf_token %}
 
-        <input type="hidden" name="checklist-id" value="{{ checklist.getId }}">
-        <input type="hidden" name="is_front" value="{{ checklist.getIsFront }}">
+            <input type="hidden" name="checklist-id" value="{{ checklist.getId }}">
+            <input type="hidden" name="is_front" value="{{ checklist.getIsFront }}">
 
-        {% for question in checklist.getQuestions %}
+            {% for question in checklist.getQuestions %}
 
-            <div id="question-{{ checklist.getId }}-{{ question.getId }}" class="question">
+                <div id="question-{{ checklist.getId }}-{{ question.getId }}" class="question">
 
-                <h3 class="questionText">{{ question.getQuestionText }}</h3>
-                <input type="hidden" class="isOptions" name="isOptions" value="{{ question.getIsOptions }}">
+                    <h3 class="questionText">{{ question.getQuestionText }}</h3>
+                    <input type="hidden" class="isOptions" name="isOptions" value="{{ question.getIsOptions }}">
 
-                {% if question.isOptions %}
+                    {% if question.isOptions %}
 
-                    <div id="options-{{ checklist.getId }}-{{ question.getId }}" class="options" onclick="">
+                        <div id="options-{{ checklist.getId }}-{{ question.getId }}" class="options" onclick="">
 
-                        {% for option in question.getOptions %}
+                            {% for option in question.getOptions %}
 
-                            <input id="option-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
-                                   name="option-{{ checklist.getId }}-{{ question.getId }}-{{ option.getId }}" value="{{ option.getOptionText }}"
-                                   type="button" class="option_button">
+                                <input id="option-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
+                                       name="option-{{ checklist.getId }}-{{ question.getId }}-{{ option.getId }}" value="{{ option.getOptionText }}"
+                                       type="button" class="option_button">
 
-                        {% endfor %}
+                            {% endfor %}
 
-                    </div>
-                    <input class="answerOption" type="hidden" value="" id="answer-option-{{ checklist.getId }}-{{ question.getId }}" name="answer-option-{{ checklist.getId }}-{{ question.getId }}">
+                        </div>
+                        <input class="answerOption" type="hidden" value="" id="answer-option-{{ checklist.getId }}-{{ question.getId }}" name="answer-option-{{ checklist.getId }}-{{ question.getId }}">
 
-                {% else %}
-                    <div class="input_div">
+                    {% else %}
+                        <div class="input_div">
 
-                        <input id="answer-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)" name="answer-{{ checklist.getId }}-{{ question.getId }}" class="input_elem" type="text" required>
+                            <input id="answer-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)" name="answer-{{ checklist.getId }}-{{ question.getId }}" class="input_elem" type="text" required>
 
-                    </div>
+                        </div>
 
-                {% endif %}
-
-            </div>
-
-        {% endfor %}
-
-        <div class="checklist_end">
-
-            <div class="question_end">
-
-                <div class="input_div">
-
-                    <input placeholder="DIN EPOST" class="input_email" name="email_sender" type="email" required>
+                    {% endif %}
 
                 </div>
 
+            {% endfor %}
+
+            <div class="checklist_end">
+
+                {% if not user.is_authenticated %}
+                    <div class="question_end">
+
+                        <div class="input_div">
+
+                            <input placeholder="DIN EPOST" class="input_email" name="email_sender" type="email" required>
+
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="submit-button">
+                    <span style="font-size: 15px;padding-top: 8px;" class="glyphicon glyphicon-send" aria-hidden="true"></span>&nbsp; Send inn
+                </button>
+
             </div>
 
-        <button type="submit" class="submit-button">
-            <span style="font-size: 25px;padding-top: 8px;" class="glyphicon glyphicon-send" aria-hidden="true"></span>&nbsp; Send inn
-        </button>
-
-        </div>
-
-    </form>
+        </form>
 
 </div>
+{% endif %}
