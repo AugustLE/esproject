@@ -113,7 +113,7 @@ function scrollToNext(object) {
 
                 document.getElementById(questions[i + 1].id).focus();
                 $('body,html').animate({
-                    scrollTop: $('#'+questions[i + 1].id).offset().top - 50
+                    scrollTop: $('#'+questions[i + 1].id).offset().top - 80
                 }, 500);
                 break;
 
@@ -142,13 +142,10 @@ function setColorOnButton(id, optionName) {
 
 }
 
-
 function checkForm(object) {
 
     var checklist_id = object.id.split("-")[1];
     var checklist = document.getElementById("checklist-" + checklist_id);
-
-    //return !!checkAnswers(checklist);
 
     if(checkAnswers(checklist)) {
 

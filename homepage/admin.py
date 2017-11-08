@@ -4,9 +4,7 @@ from .models import CheckList, Question
 from .models import Option
 from .models import Answer
 from .models import ChecklistAnswer
-
 # Register your models here.
-admin.site.register(Answer)
 
 
 class OptionInline(admin.StackedInline):

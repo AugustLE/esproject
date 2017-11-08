@@ -48,7 +48,6 @@ function initView() {
 
     for(i = 0; i < menu_items.length; i++) {
 
-        console.log(content_items[i].id);
         node_ids.push(content_items[i].id);
         nodes.push(content_items[i]);
     }
@@ -56,6 +55,18 @@ function initView() {
     //clickItem(0);
     if(page_id === "answers")
         removeNodes();
+}
+
+function answerClick(answer) {
+
+    console.log("Test");
+    console.log(answer.querySelector(".answer_solution").value);
+
+    $('.modal-header #header').html(answer.querySelector(".answer_question").innerHTML);
+    $('.modal-body #your_answer').html(answer.querySelector(".answer_answer").innerHTML);
+    $('.modal-body #our_tips').html(answer.querySelector(".answer_solution").value);
+    $('#answer_modal').modal('show');
+
 }
 
 window.onload = function() {

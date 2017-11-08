@@ -28,6 +28,7 @@ class Option(models.Model):
 
     optionText = models.CharField(max_length=300)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    solution = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
 
@@ -47,7 +48,12 @@ class Answer(models.Model):
     answerText = models.CharField(max_length=500)
     question = models.CharField(max_length=500)
     answerChecklist = models.ForeignKey(ChecklistAnswer, on_delete=models.CASCADE)
+    option = models.ForeignKey(Option, blank=True, null=True)
 
     def __str__(self):
         return self.answerText
+
+
+
+
 

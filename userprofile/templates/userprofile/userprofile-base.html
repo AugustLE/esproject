@@ -12,7 +12,7 @@
 
         <div class="top-container">
 
-            <nav style="position: fixed; width: 100%; top: 0; padding-top: 15px; background-color: white; z-index: 10;" class="navbar-collapse" role="navigation">
+            <nav style="box-shadow: 0 2px 2px -2px #000000;position: fixed; width: 100%; top: 0; padding-top: 15px; padding-bottom: 10px; background-color: white; z-index: 10;" class="navbar-collapse" role="navigation">
 
                 <div class="container-fluid">
 
@@ -25,19 +25,22 @@
 
                         </button>
 
+                        <a id="company_header" class="navbar-brand" href={% url 'homepage:index' %}>
+                            <img id="company_header" src="../../static/homepage/images/logo_oval.svg">
+
+                        </a>
+
                     </div>
                     <div class="collapse navbar-collapse" id="main_navbar">
 
-                        <ul class="nav navbar-nav navbar-left">
+                        <ul class="nav navbar-nav navbar-right">
 
                             <li>
-                                <a href="{% url 'homepage:index' %}">
+                                <a href="{% url 'homepage:logout' %}">
 
-                                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Hjem
-
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
                                 </a>
                             </li>
-
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
@@ -66,14 +69,14 @@
                             </li>
 
                             <li>
-                                <a href="{% url 'homepage:logout' %}">
+                                <a href="{% url 'homepage:index' %}">
 
-                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logg ut
+                                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Hjem
+
                                 </a>
                             </li>
                             &nbsp;
                             &nbsp;
-
                         </ul>
 
                     </div>

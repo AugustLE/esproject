@@ -202,19 +202,20 @@ def sendInChecklist(request):
 
     for question in Question.objects.filter(checkList__pk=checklist_id):
 
-
         if question.isOptions:
             answer = request.POST['answer-option-' + checklist_id + '-' + str(question.id)]
+            option = Option.objects.get(optionText=answer, question=question)
+            db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist, option=option)
+            db_answer.save()
         else:
             answer = request.POST['answer-' + checklist_id + '-' + str(question.id)]
+            db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
+            db_answer.save()
 
         if answer == "":
             is_filled = False
 
         answers.append([question.question_text, answer])
-
-        db_answer = Answer(answerText=answer, question=question, answerChecklist=answer_checklist)
-        db_answer.save()
 
     if not is_filled:
         ChecklistAnswer.objects.get(answer_email=email).delete()

@@ -27,9 +27,12 @@
 
                             {% for option in question.getOptions %}
 
-                                <input id="option-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
-                                       name="option-{{ checklist.getId }}-{{ question.getId }}-{{ option.getId }}" value="{{ option.getOptionText }}"
-                                       type="button" class="option_button">
+                                <button id="option-{{ checklist.getId }}-{{ question.getId }}" onclick="setValueOnAnswer(this)"
+                                       name="option-{{ checklist.getId }}-{{ question.getId }}-{{ option.getId }}"
+                                       type="button" class="option_button" value="{{ option.getOptionText }}">
+
+                                    <p>{{ option.getOptionText }}</p>
+                                </button>
 
                             {% endfor %}
 

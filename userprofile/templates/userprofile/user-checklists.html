@@ -39,10 +39,13 @@
 
                     {% for answer in checklist_answer %}
 
-                        <div class="answer_container">
+                        <div class="answer_container" onclick="answerClick(this);">
 
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            <input class="answer_solution" type="hidden" value="{{ answer.option.solution }}">
                             <h2 class="answer_question">{{ answer.question }}</h2>
                             <h4 class="answer_answer">{{ answer.answerText }}</h4>
+
                         </div>
 
                     {% endfor %}
@@ -51,5 +54,6 @@
             {% endfor %}
         </div>
     </div>
+    {% include 'userprofile/answer-modal.html' %}
 
 {% endblock %}
