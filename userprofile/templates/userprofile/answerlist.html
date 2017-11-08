@@ -1,0 +1,21 @@
+{% for checklist_answer in answer_objects.0 %}
+
+    <div class="answer_body" id="answer-{{ checklist_answer.getId }}">
+
+        <h1 class="answer_title">Dine svar:</h1>
+
+        {% for answer in checklist_answer.getAnswers %}
+
+            <div class="answer_container" onclick="answerClick(this);">
+
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <input class="answer_solution" type="hidden" value="{{ answer.option.solution }}">
+                <h2 class="answer_question">{{ answer.question }}</h2>
+                <h4 class="answer_answer">{{ answer.answerText }}</h4>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+{% endfor %}

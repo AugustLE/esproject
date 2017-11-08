@@ -2,20 +2,19 @@
 
 {% block content %}
 
-    <script src="../../static/userprofile/js/checklistAnswer.js"></script>
     <input type="hidden" id="page_id" value="answers">
     <div class="user-checklists-body">
 
         <div style="margin-top: 150px;" class="checklists_menu">
 
-            {% if query_set.0 %}
+            {% if answer_objects.0 %}
 
-                {% for checklist in query_set.0 %}
+                {% for checklist in answer_objects.0 %}
 
                     <div class="checklists_menu_item" onclick="clickItem(this)" id="item-{{ checklist.id }}">
 
                         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                        <h2>{{ checklist.checklist.name }}</h2>
+                        <h2>{{ checklist.getName }}</h2>
 
                     </div>
 
@@ -28,30 +27,10 @@
             {% endif %}
 
         </div>
-
+        <script src="../../static/userprofile/js/checklistAnswer.js"></script>
         <div class="answers_content_container" id="answers_content_container">
 
-            {% for checklist_answer in query_set.1 %}
-
-                <div style="margin-top: 0px;" class="answer_body" id="answer-{{ checklist_answer.0.answerChecklist.pk }}">
-
-                    <h1 class="answer_title">Dine svar:</h1>
-
-                    {% for answer in checklist_answer %}
-
-                        <div class="answer_container" onclick="answerClick(this);">
-
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            <input class="answer_solution" type="hidden" value="{{ answer.option.solution }}">
-                            <h2 class="answer_question">{{ answer.question }}</h2>
-                            <h4 class="answer_answer">{{ answer.answerText }}</h4>
-
-                        </div>
-
-                    {% endfor %}
-
-                </div>
-            {% endfor %}
+            {% include 'userprofile/answerlist.html' %}
         </div>
     </div>
     {% include 'userprofile/answer-modal.html' %}

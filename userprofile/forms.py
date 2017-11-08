@@ -5,11 +5,11 @@ from django import forms
 
 class UserChangeForm(forms.ModelForm):
 
-    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}))
-    company_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}))
-    phone = forms.CharField(max_length=8, widget=forms.TextInput(attrs={'class': 'login-field'}))
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}))
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}), required=True)
+    company_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}),required=False)
+    phone = forms.CharField(max_length=8, widget=forms.TextInput(attrs={'class': 'login-field'}),required=False)
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}),required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'login-field'}),required=False)
     password1 = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'class': 'login-field'}))
     password2 = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'class': 'login-field'}))
 

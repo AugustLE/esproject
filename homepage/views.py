@@ -15,6 +15,7 @@ from.models import ChecklistAnswer
 from .CustomClasses.ChecklistLocal import ChecklistLocal
 from .CustomClasses.QuestionLocal import QuestionLocal
 from .CustomClasses.OptionLocal import OptionLocal
+from .CustomClasses.AnswersLocal import AnswersLocal
 
 class IndexView(generic.ListView):
 
@@ -26,7 +27,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
 
-        return ["Er du GDPR COMPLIANT?", [fetchStartChecklist()]]
+        return ["Er du GDPR COMPLIANT?", [fetchStartChecklist(self.request)]]
 
 class AboutView(generic.ListView):
 
@@ -61,7 +62,7 @@ class ChecklistView(generic.ListView):
 
     def get_queryset(self):
 
-        return ["Sjekklister", fetchCheckLists()]
+        return ["Sjekklister", fetchCheckLists(self.request)]
 
 class ConfirmationView(generic.ListView):
 
@@ -137,18 +138,20 @@ class UserSignupFormView(View):
 
 
 
-def fetchStartChecklist():
+def fetchStartChecklist(request):
 
     if CheckList.objects.filter(is_front=True).count() > 0:
-        return createAndReturnChecklist(CheckList.objects.get(is_front=True))
+        return createAndReturnChecklist(CheckList.objects.get(is_front=True), request)
 
     return None
 
 
 
-def createAndReturnChecklist(checklistK):
+def createAndReturnChecklist(checklistK, request):
 
-    checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk, checklistK.is_front)
+    is_answered = ChecklistAnswer.objects.filter(answer_email=request.user.email, checklist=checklistK).count() > 0
+    print(is_answered)
+    checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk, checklistK.is_front, is_answered)
 
     for questionK in Question.objects.filter(checkList__pk=checklistK.pk).order_by('priority'):
 
@@ -169,13 +172,13 @@ def createAndReturnChecklist(checklistK):
     return checklist_1
 
 
-def fetchCheckLists():
+def fetchCheckLists(request):
 
     all_checklists = []
 
     for checklistK in CheckList.objects.filter(is_front=False):
 
-        all_checklists.append(createAndReturnChecklist(checklistK))
+        all_checklists.append(createAndReturnChecklist(checklistK, request))
 
     return all_checklists
 
@@ -198,7 +201,8 @@ def sendInChecklist(request):
     answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
     answer_checklist.save()
 
-    answers = []
+    #answers = []
+    answer_object = AnswersLocal(answer_checklist.checklist.name, answer_checklist.id)
 
     for question in Question.objects.filter(checkList__pk=checklist_id):
 
@@ -215,14 +219,15 @@ def sendInChecklist(request):
         if answer == "":
             is_filled = False
 
-        answers.append([question.question_text, answer])
+        answer_object.addAnswer(db_answer)
+        #answers.append([question.question_text, answer])
 
     if not is_filled:
         ChecklistAnswer.objects.get(answer_email=email).delete()
 
     message = 'Takk for dine svar!'
 
-    return render(request, 'homepage/confirmation.html', {'query_set':[message], 'id':4, 'answers': answers,})
+    return render(request, 'homepage/confirmation.html', {'query_set': [message], 'id': 4, 'answer_objects': [[answer_object]],})
     #return render(request, 'homepage/confirmation.html', {})
 
 

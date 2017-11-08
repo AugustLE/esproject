@@ -17,6 +17,9 @@
 
             <div class="checklists_menu_item" onclick="clickItem(this)" id="item-{{ checklist.getId }}">
 
+                {% if checklist.isAnswered %}
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                {% endif %}
                 <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                 <h2>{{ checklist.getName }}</h2>
 

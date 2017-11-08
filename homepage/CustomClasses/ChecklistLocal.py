@@ -1,12 +1,13 @@
 
 class ChecklistLocal:
 
-    def __init__(self, name, id, is_front):
+    def __init__(self, name, id, is_front, is_answered):
 
         self.name = name
         self.id = id
         self.questions = []
         self.is_front = is_front
+        self.is_answered = is_answered
 
 
     def addQuestion(self, option):
@@ -28,6 +29,9 @@ class ChecklistLocal:
     def getIsFront(self):
 
         return self.is_front
+
+    def isAnswered(self):
+        return self.is_answered
 
 
 

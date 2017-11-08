@@ -1,0 +1,152 @@
+
+.profile-body {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.profile-top {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profile-top .profile-title {
+
+    font-size: 25px;
+    font-family: Copperplate;
+    margin-bottom: 12px;
+    padding-bottom: 0;
+    font-weight: bold;
+}
+/*.profile-top hr {
+
+    padding-top: 0;
+    margin-top: 10px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.21);
+    width: 400px;
+}*/
+
+.profile-mid {
+
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    position: relative;
+    border-radius: 6px;
+}
+
+.profile-mid:hover {
+
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    cursor: pointer;
+}
+
+.profile-mid:hover.profile-mid span {
+
+    visibility: visible;
+}
+
+.profile-mid span {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 8px;
+    margin-right: 8px;
+    font-size: 20px;
+    opacity: 0.75;
+    visibility: hidden;
+}
+
+.profile-mid .field-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px;
+    border-radius: 4px;
+    padding: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+
+}
+
+
+.profile-mid .field-container p {
+
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.profile-mid .field-container .email-text {
+
+    font-family: "Copperhead";
+    font-weight: 500;
+}
+.profile-mid .field-container .thick {
+
+    font-weight: 800;
+    font-size: 20px;
+    font-family: Copperplate;
+}
+.profile-mid .field-container .not-reg {
+
+    font-weight: 100;
+    font-size: 15px;
+    color: #333333;
+}
+
+#remove_edit {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 15px;
+    margin-right: 0;
+    margin-top: -38px;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 8px;
+    /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
+    border-style: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#remove_edit:hover {
+
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+@media screen and (max-width: 800px) {
+
+    .profile-mid {
+
+        width: 90%;
+    }
+
+    .profile-edit {
+
+
+    }
+}
+
+
+

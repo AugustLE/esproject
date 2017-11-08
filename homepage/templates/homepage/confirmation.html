@@ -4,24 +4,9 @@
 
     {% include 'homepage/top-image-container.html' %}
      <script src="../../static/homepage/js/index.js"></script>
-
-    <div class="answer_body">
-
-        {% if id == 4 %}
-
-            <h1 class="answer_title">Dine svar:</h1>
-        {% endif %}
-
-        {% for answer in answers %}
-
-            <div class="answer_container">
-
-                <h2 class="answer_question">{{ answer.0 }}</h2>
-                <h4 class="answer_answer">{{ answer.1 }}</h4>
-            </div>
-
-        {% endfor %}
-
-    </div>
+    <input type="hidden" id="page_id" value="confirmation">
+    {% include 'userprofile/answerlist.html' %}
+    {% include 'userprofile/answer-modal.html' %}
+    <script type="text/javascript" src="../../../static/userprofile/js/checklistAnswer.js"></script>
 
 {% endblock %}

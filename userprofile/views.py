@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from homepage.models import ChecklistAnswer
 from homepage.models import Answer
+from homepage.CustomClasses.AnswersLocal import AnswersLocal
 
 from .forms import UserChangeForm
 
@@ -74,19 +75,18 @@ class ChecklistView(generic.ListView):
     template_name = 'userprofile/user-checklists.html'
 
     id = 1
-    context_object_name = 'query_set'
+    context_object_name = 'answer_objects'
 
     def get_queryset(self):
 
         checklists = ChecklistAnswer.objects.filter(answer_email=self.request.user.email)
-
         answers = []
 
         for checklist in checklists:
-            checklist_answers = []
+            answers_object = AnswersLocal(checklist.checklist.name, checklist.id)
             for answer in Answer.objects.filter(answerChecklist=checklist):
-                checklist_answers.append(answer)
-            answers.append(checklist_answers)
+                answers_object.addAnswer(answer)
+            answers.append(answers_object)
 
-        return [checklists, answers]
+        return [answers]
 

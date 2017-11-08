@@ -3,7 +3,9 @@
     <div class="checklist" id="checklist-{{ checklist.getId }}">
 
         <div class="titleContainer">
-
+            {% if checklist.isAnswered %}
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            {% endif %}
             <p class="checklistTitle">{{ checklist.getName }}</p>
             <hr>
         </div>
@@ -15,7 +17,7 @@
             <input type="hidden" name="is_front" value="{{ checklist.getIsFront }}">
 
             {% for question in checklist.getQuestions %}
-
+        
                 <div id="question-{{ checklist.getId }}-{{ question.getId }}" class="question">
 
                     <h3 class="questionText">{{ question.getQuestionText }}</h3>
