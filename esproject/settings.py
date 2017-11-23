@@ -15,7 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+import datetime
+TOKEN_EXPIRE_TIME=datetime.timedelta(days=20)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'wv14$6fnwmeavqflf$^nogut_m(77wal9d3bzfayoiapsa-cx!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['46.101.61.74', '127.0.0.1', '192.168.20.7']
+ALLOWED_HOSTS = ['46.101.61.74', '127.0.0.1', 'adall.no']
 
 AUTH_USER_MODEL = 'user.CustomUser'
 # Application definition
@@ -41,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +111,21 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #'rest_framework.authentication.BasicAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+        #"'rest_framework.authentication.TokenAuthentication',
+        'rest.authentication.ExpiringTokenAuthentication',
+    ),
+    #'DEFAULT_RENDERER_CLASSES': (
+     #   'rest_framework.renderers.JSONRenderer',
+    #),
+    #'DEFAULT_PERMISSION_CLASSES': (
+     #  'rest_framework.permissions.AllowAny',
+    #)
+}
 
 
 # Internationalization

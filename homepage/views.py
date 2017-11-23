@@ -10,7 +10,7 @@ from .models import CheckList
 from .models import Question
 from .models import Option
 from .models import Answer
-from.models import ChecklistAnswer
+from .models import ChecklistAnswer
 
 from .CustomClasses.ChecklistLocal import ChecklistLocal
 from .CustomClasses.QuestionLocal import QuestionLocal
@@ -149,8 +149,11 @@ def fetchStartChecklist(request):
 
 def createAndReturnChecklist(checklistK, request):
 
-    is_answered = ChecklistAnswer.objects.filter(answer_email=request.user.email, checklist=checklistK).count() > 0
-    print(is_answered)
+    if request.user.is_authenticated:
+        is_answered = ChecklistAnswer.objects.filter(answer_email=request.user.email, checklist=checklistK).count() > 0
+    else:
+        is_answered = False
+
     checklist_1 = ChecklistLocal(checklistK.name, checklistK.pk, checklistK.is_front, is_answered)
 
     for questionK in Question.objects.filter(checkList__pk=checklistK.pk).order_by('priority'):
@@ -190,18 +193,19 @@ def sendInChecklist(request):
 
     if request.user.is_authenticated:
         email = request.user.email
+        owner = request.user
     else:
         email = request.POST['email_sender']
+        owner = None
     is_filled = True
 
     if ChecklistAnswer.objects.filter(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id))).count() > 0:
         return render(request,'homepage/confirmation.html',
                                   {'query_set': ['Du har allerede svart på denne listen'], 'id': 5})
 
-    answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)))
+    answer_checklist = ChecklistAnswer(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_id)), owner=owner)
     answer_checklist.save()
 
-    #answers = []
     answer_object = AnswersLocal(answer_checklist.checklist.name, answer_checklist.id)
 
     for question in Question.objects.filter(checkList__pk=checklist_id):
@@ -220,7 +224,6 @@ def sendInChecklist(request):
             is_filled = False
 
         answer_object.addAnswer(db_answer)
-        #answers.append([question.question_text, answer])
 
     if not is_filled:
         ChecklistAnswer.objects.get(answer_email=email).delete()
@@ -228,6 +231,6 @@ def sendInChecklist(request):
     message = 'Takk for dine svar!'
 
     return render(request, 'homepage/confirmation.html', {'query_set': [message], 'id': 4, 'answer_objects': [[answer_object]],})
-    #return render(request, 'homepage/confirmation.html', {})
+
 
 

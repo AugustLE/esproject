@@ -18,3 +18,14 @@ esproject/__pycache__/settings.cpython-36.pyc
 
 migrations
 static
+
+esproject/__init__.pyc
+esproject/settings.pyc
+homepage/__init__.pyc
+homepage/models.pyc
+
+rest/__init__.pyc
+
+user/__init__.pyc
+user/models.pyc
+userprofile/__init__.pyc
