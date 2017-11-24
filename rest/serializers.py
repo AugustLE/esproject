@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from homepage.models import CheckList, Question, Option, ChecklistAnswer, Answer
 from user.models import CustomUser
+from rest_framework.response import Response
+from rest_framework import status
 
 class OptionSerializer(serializers.ModelSerializer):
 
@@ -64,9 +66,10 @@ class ChecklistAnswerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        answer_data = validated_data.pop('answers')
         print(validated_data)
+        answer_data = validated_data.pop('answers')
         ch_answer = ChecklistAnswer.objects.create(**validated_data)
+
         for answer in answer_data:
             Answer.objects.create(answerChecklist=ch_answer, **answer)
         return ch_answer

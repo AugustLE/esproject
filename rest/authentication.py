@@ -16,7 +16,6 @@ class ExpiringTokenAuthentication(TokenAuthentication):
             token = Token.objects.get(key=key)
 
         except: #self.model.DoesNotExist:
-            print("YES MAN 3")
             raise exceptions.AuthenticationFailed('Invalid token')
 
         if not token.user.is_active:

@@ -75,18 +75,23 @@ class ChecklistAnswerList(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     @csrf_exempt
     def get(self, request, format=None):
-        checklist_answers = ChecklistAnswer.objects.all()
+        checklist_answers = ChecklistAnswer.objects.filter(answer_email=request.user.email)
         serializer = ChecklistAnswerSerializer(checklist_answers, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
 
-        print(request.data)
         serializer = ChecklistAnswerSerializer(data=request.data)
+        email = request.data['answer_email']
+        checklist_pk = request.data['checklist']
+
         if serializer.is_valid():
-            #print("AFTER" + str(serializer.data))
+
+            if ChecklistAnswer.objects.filter(answer_email=email, checklist=CheckList.objects.get(pk=str(checklist_pk))).count() > 0:
+                return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+
             serializer.save()
-            print("AFTER" + str(serializer.data))
+            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -115,22 +120,35 @@ class ChecklistAnswerDetail(APIView):
         try:
             return ChecklistAnswer.objects.get(pk=pk)
         except ChecklistAnswer.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return None
 
     @csrf_exempt
     def delete(self, request, pk, format=None):
-        print("TESTEH")
-        ch_answer = self.getChAnswer(pk)
-        ch_answer.delete()
+
+        checklist_answer = self.getChAnswer(pk)
+        if not checklist_answer:
+            return Response({"error": "Not found"},status=status.HTTP_404_NOT_FOUND)
+        if (checklist_answer.owner and checklist_answer.owner.auth_token != request.user.auth_token) or (request.user.email != checklist_answer.answer_email):
+            return Response({"error": "Not authorized"}, status=status.HTTP_401_UNAUTHORIZED)
+        checklist_answer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
     @csrf_exempt
     def get(self, request, pk, format=None):
-        print(request.method)
-        checklist_answers = ChecklistAnswer.objects.get(pk=pk)
-        serializer = ChecklistAnswerSerializer(checklist_answers, many=False)
+
+        #if request.data['email']
+        checklist_answer = self.getChAnswer(pk)
+        serializer = ChecklistAnswerSerializer(checklist_answer, many=False)
+
+        if not checklist_answer:
+            return Response({"error": "Not found"},status=status.HTTP_404_NOT_FOUND)
+
+        if (checklist_answer.owner and checklist_answer.owner.auth_token != request.user.auth_token) or (request.user.email != serializer.data['answer_email']):
+            return Response({"error": "Not authorized"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response(serializer.data)
+
+
 
     @csrf_exempt
     def post(self, request, pk, format=None):
@@ -158,11 +176,7 @@ class UserAuth(APIView):
 
         email = request.data.get('email')
         password = request.data.get('password')
-
-        #TokenAuthentication.authenticate(self,request)
-        print("BEFOREEEE")
         user = authenticate(email=email, password=password)
-        print("AFTEEEEEER")
 
         if not user:
             return Response({"error": "Login failed"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -183,10 +197,10 @@ class UserAuthToken(ObtainAuthToken):
             Token.objects.filter(user=user).delete()
             token, created = Token.objects.get_or_create(user=user)
 
-            if not created:
+            #if not created:
                 # update the created time of the token to keep it valid
-                token.created = datetime.datetime.utcnow()
-                token.save()
+             #   token.created = datetime.datetime.utcnow()
+              #  token.save()
 
             return Response({'token': token.key})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
