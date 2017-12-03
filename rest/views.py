@@ -115,7 +115,7 @@ class ChecklistAnswerDetail(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     @csrf_exempt
-    def getChAnswer(self, pk):
+    def getChAnswer(self, pk):  
 
         try:
             return ChecklistAnswer.objects.get(pk=pk)
@@ -162,10 +162,12 @@ class ChecklistAnswerDetail(APIView):
 
 
 class UserList(generics.ListAPIView):
+    permission_classes = (permissions.IsAdminUser,)
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 class UserDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAdminUser,)
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 

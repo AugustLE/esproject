@@ -2,8 +2,6 @@ from rest_framework import serializers
 
 from homepage.models import CheckList, Question, Option, ChecklistAnswer, Answer
 from user.models import CustomUser
-from rest_framework.response import Response
-from rest_framework import status
 
 class OptionSerializer(serializers.ModelSerializer):
 
@@ -24,11 +22,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = ('pk', 'checklist_id', 'question_text', 'isOptions', 'priority', 'options')
 
-    """def create(self, validated_data):
-        
-        subject = Question.objects.create()"""
-
-
 
 class ChecklistSerializer(serializers.ModelSerializer):
 
@@ -38,7 +31,6 @@ class ChecklistSerializer(serializers.ModelSerializer):
         model = CheckList
         fields = ('pk', 'name', 'is_front', 'questions')
         #fields = '__all__'
-
 
 
 class AnswerSerializer(serializers.ModelSerializer):
