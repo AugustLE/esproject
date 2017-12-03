@@ -119,9 +119,9 @@ REST_FRAMEWORK = {
         #"'rest_framework.authentication.TokenAuthentication',
         'rest.authentication.ExpiringTokenAuthentication',
     ),
-    #'DEFAULT_RENDERER_CLASSES': (
-     #   'rest_framework.renderers.JSONRenderer',
-    #),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
     #'DEFAULT_PERMISSION_CLASSES': (
      #  'rest_framework.permissions.AllowAny',
     #)
