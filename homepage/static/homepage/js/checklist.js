@@ -63,8 +63,9 @@ function initView() {
     }
 
     //clickItem(0);
-    if(page_id === "checklists")
-        removeNodes();
+    //TODO hides all the checklists at pageload
+    //if(page_id === "checklists")
+        //removeNodes();
 }
 
 window.onload = function() {

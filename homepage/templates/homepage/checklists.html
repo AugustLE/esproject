@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% include 'homepage/top-image-container.html' %}
+    <!--{% include 'homepage/top-image-container.html' %}-->
     <script src="../../static/homepage/js/checklist.js"></script>
     <script src="../../static/homepage/js/index.js"></script>
     <!--<script src="../../static/homepage/js/scroller.js"></script>
@@ -11,7 +11,8 @@
     <input type="hidden" id="page_id" value="checklists">
 
 
-    <div class="checklists_menu">
+        <!-- TODO Checklist menu -->
+    <!--<div class="checklists_menu">
 
         {% for checklist in query_set.1 %}
 
@@ -27,8 +28,10 @@
 
         {% endfor %}
 
-    </div>
+    </div>-->
 
+    <!--TODO code for displaying all checklists.  -->
+    <!--
     <div class="checlists_content_container" id="checlists_content_container">
 
         {% for checklist in query_set.1 %}
@@ -37,6 +40,15 @@
 
         {% endfor %}
     </div>
+    -->
+    <div class="checlists_content_container" id="checlists_content_container">
+
+        {% for checklist in query_set.1 %}
+
+            {% include 'homepage/checklist.html' %}
+        {% endfor %}
+    </div>
+
 
     {% include 'homepage/not-filled-modal.html' %}
 

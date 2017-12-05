@@ -68,6 +68,11 @@
 .checlists_content_container {
 
     width: 100%;
+    margin-top: 100px;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 2.0s;
+    animation-name: fade;
+    animation-duration: 2.0s;
 }
 
 .checklist {
@@ -112,6 +117,7 @@
 
 .checklist .titleContainer .checklistTitle {
 
+    opacity: 0.9;
     display: flex;
     justify-content: center;
     margin-left: auto;
@@ -155,6 +161,7 @@
 
 .checklist .question .questionText {
 
+    opacity: 0.8;
     display: flex;
     justify-content: center;
     margin-left: auto;
@@ -214,6 +221,7 @@
     text-align: center;
     margin: auto;
     padding: 2px;
+    opacity: 0.8;
 }
 
 .checklist .question .options .option_button:hover {

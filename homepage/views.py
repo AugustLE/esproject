@@ -62,7 +62,8 @@ class ChecklistView(generic.ListView):
 
     def get_queryset(self):
 
-        return ["Sjekklister", fetchCheckLists(self.request)]
+        #return ["Sjekklister", fetchCheckLists(self.request)]
+        return ["...", [fetchStartChecklist(self.request)]]
 
 class ConfirmationView(generic.ListView):
 
@@ -85,7 +86,6 @@ class UserLoginFormView(View):
     def get(self, request):
         form = self.form_class(None)
         return render(request, self.template_name, {'form': form, 'view_id': 5})
-
 
     #process form data
     #loggs in the user
