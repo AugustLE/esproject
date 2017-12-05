@@ -70,8 +70,8 @@ function initView() {
 window.onload = function() {
 
     initView();
-    if(page_id === "index")
-        setTimeout(scrollDown, 250)
+    //if(page_id === "index")
+      //  setTimeout(scrollDown, 250)
 };
 
 

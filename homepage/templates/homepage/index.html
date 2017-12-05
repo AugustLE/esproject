@@ -4,7 +4,9 @@
 {% block content %}
 
 
-    {% include 'homepage/top-image-container.html' %}
+    <!--{% include 'homepage/top-image-container.html' %}-->
+    {% include 'homepage/top-slider.html' %}
+    <script src="../../static/homepage/js/top-slider.js"></script>
     <script src="../../static/homepage/js/index.js"></script>
     <script src="../../static/homepage/js/scroller.js"></script>
     <script src="../../static/homepage/js/checklist.js"></script>
@@ -17,6 +19,31 @@
 
     </div>
 
+
+    <div class="info-content">
+        <h1 class="header">Adall hjelper dere med</h1>
+        <div class="info-box-container">
+
+            <div class="info-box">
+                <h3>Ekspertise</h3>
+                <p>Gjennom vårt partnerskap med Advokatfirmaet Arktis og teamets utdanning og erfaring har vi god kompetanse innen personvern, informasjonssikkerhet og juridiske aspekter.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Lovpålagte juridiske dokumenter</h3>
+                <p>Vi har laget enkle maler som dekker Datatilsynet sine krav til juridiske dokumenter. Ved å hente akkurat riktig mengde informasjon om deres virksomhet skreddersyr vi personvernerklæring, samtykke- og databehandleravtaler.</p>
+            </div>
+            <div class="info-box">
+                <h3>Dokumentasjonsverktøy</h3>
+                <p>Dokumenter deres arbeid med GDPR online på vår plattform. Hos Adall kan deres arbeid dokumenteres</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--
     <div class="checlists_content_container" id="checlists_content_container">
 
         {% for checklist in query_set.1 %}
@@ -24,6 +51,7 @@
             {% include 'homepage/checklist.html' %}
         {% endfor %}
     </div>
+    -->
     {% include 'homepage/not-filled-modal.html' %}
 
 

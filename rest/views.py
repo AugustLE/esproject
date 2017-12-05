@@ -40,16 +40,22 @@ class CheckListDetail(APIView):
 
     def getChecklist(self, pk):
 
-        try:
+        if CheckList.objects.filter(pk=pk).count() > 0:
+
             return CheckList.objects.get(pk=pk)
-        except CheckList.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        return None
+
+
 
     @csrf_exempt
     def get(self, request, pk, format=None):
 
         print(pk)
         checklist = self.getChecklist(pk)
+
+        if not checklist:
+            print("YES")
+            return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = ChecklistSerializer(checklist, many=False)
         return Response(serializer.data)
@@ -117,10 +123,9 @@ class ChecklistAnswerDetail(APIView):
     @csrf_exempt
     def getChAnswer(self, pk):  
 
-        try:
+        if ChecklistAnswer.objects.filter(pk=pk).count() > 0:
             return ChecklistAnswer.objects.get(pk=pk)
-        except ChecklistAnswer.DoesNotExist:
-            return None
+        return None
 
     @csrf_exempt
     def delete(self, request, pk, format=None):

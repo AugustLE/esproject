@@ -16,7 +16,7 @@ function scrollDown() {
 
 window.onload = function() {
 
-    setTimeout(scrollDown, 250);
+    //setTimeout(scrollDown, 250);
 
     //scrollDown();
 };
