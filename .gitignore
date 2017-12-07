@@ -18,7 +18,7 @@ esproject/__pycache__/settings.cpython-36.pyc
 
 migrations
 /static
-
+.DS_Store
 esproject/__init__.pyc
 esproject/settings.pyc
 homepage/__init__.pyc

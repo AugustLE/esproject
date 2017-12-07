@@ -68,7 +68,7 @@
 .checlists_content_container {
 
     width: 100%;
-    margin-top: 100px;
+    margin-top: 120px;
     -webkit-animation-name: fade;
     -webkit-animation-duration: 2.0s;
     animation-name: fade;
@@ -79,7 +79,8 @@
 
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 90%;
     margin-bottom: 60px;
@@ -117,7 +118,7 @@
 
 .checklist .titleContainer .checklistTitle {
 
-    opacity: 0.9;
+    opacity: 0.85;
     display: flex;
     justify-content: center;
     margin-left: auto;

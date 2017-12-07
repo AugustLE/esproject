@@ -2,44 +2,72 @@
 
 {% block content %}
 
-    {% include 'homepage/top-image-container.html' %}
-
     <script src="../../static/homepage/js/scroller.js"></script>
     <script src="../../static/homepage/js/index.js"></script>
     <input type="hidden" value="110" id="scroll_offset">
     <input type="hidden" value="about_gdpr_part" id="scroll_point">
-    <div class="about_gdpr_container">
 
-        <div class="about_gdpr_part" id="about_gdpr_part">
+    <div class="about-content">
+    <!--<h1 class="header">Om Adall</h1>-->
+        <div class="about-box-container">
 
-            <h1>Info 1</h1>
-            <hr>
-            <p>Tekst om info 1 tekst om info 1
-                Tekst om info 1 tekst om info 1
-                Tekst om info 1 tekst om info 1
-                Tekst om info 1 tekst om info 1
-                Tekst om info 1 tekst om info 1
-                Tekst om info 1 tekst om info.......
+            <div class="about-box">
+                <h3>Om GDPR</h3>
+                <p> Tekst</p>
+            </div>
 
-            </p>
-        </div>
-
-        <div class="about_gdpr_part">
-
-            <h1>Info 2</h1>
-            <hr>
-            <p>
-                Tekst om info 2 tekst om info 2
-                Tekst om info 2 tekst om info 2
-                Tekst om info 2 tekst om info 2
-                Tekst om info 2 tekst om info 2
-                Tekst om info 2 tekst om info 2
-                Tekst om info 2 tekst om info 2.....
-
-            </p>
 
         </div>
 
     </div>
+
+
+    <div class="about_us_container">
+     <!--<h1>Team</h1>-->
+        <div class="part_container">
+
+            <div class="image-side">
+
+                <img src="../../static/homepage/images/image_template.png" />
+                <!--<h3>Nina Bakås</h3>
+                <p class="about_title">CEO</p>-->
+
+                <!--<div class="about_info_container">
+                  <p class="about_info">+47 97597891</p>
+                  <p class="about_info">nina.bakas@hotmail.com</p>
+                </div>-->
+            </div>
+            <div class="info-side">
+
+                <h3>Info 1</h3>
+                <h4>Tekst ..</h4>
+
+                <br>
+                <p>Beskrivende tekst</p>
+            </div>
+
+        </div>
+
+        <div class="part_container">
+
+            <div class="info-side">
+
+                <h3>Info 2</h3>
+                <h4>Tekst 2..</h4>
+
+                <br>
+                <p>Beskrivende tekst 2 ....</p>
+            </div>
+
+            <div class="image-side">
+
+                <img src="../../static/homepage/images/image_template.png" />
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 {% endblock %}

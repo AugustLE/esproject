@@ -47,6 +47,7 @@ body {
 /* TODO END BLUE NAVBAR*/
 
 /* TODO WHITE NAVBAR */
+
 .navbar-collapse li a {
 
     color: rgba(0, 0, 0, 0.75);
@@ -59,13 +60,14 @@ body {
 
 .navbar li a span {
 
-    font-size: 15px;
+    font-size: 12px;
 }
+
 
 .active {
 
-    background-color: rgba(57, 57, 57, 0.21);
-
+    /*background-color: rgba(57, 57, 57, 0.21);*/
+    text-decoration: underline;
 }
 
 .top_image_container {

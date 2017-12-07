@@ -6,7 +6,7 @@
 
         <div class="top-container">
             <!-- class="navbar navbar-light navbar-fixed-top"  -->
-            <nav style="box-shadow: 0 1px 2px -2px #000000; position: fixed; width: 100%; top: 0; padding-top: 15px; padding-bottom: 10px; background-color: white; z-index: 10;" class="navbar-collapse" role="navigation">
+            <nav style="box-shadow: 0 1px 2px -2px #000000;position: fixed; width: 100%;top: 0;padding-top: 15px;padding-bottom: 10px;background-color: white; z-index: 10;" class="navbar-collapse" role="navigation">
 
                 <div class="container-fluid">
 
@@ -32,10 +32,11 @@
                                 <a href="{% url 'homepage:aboutUs' %}"
                                     {% if view.id == 1 %}
                                         class="active"
+                                        style="font-size: 17px"
 
                                     {% endif %}>
 
-                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> OM OSS
+                                    <!--<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>--> OM OSS
 
                                 </a>
                             </li>
@@ -45,9 +46,10 @@
                                 <a href="{% url 'homepage:aboutGDPR' %}"
                                     {% if view.id == 2 %}
                                         class="active"
+                                        style="font-size: 17px"
                                     {% endif %} >
 
-                                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> OM GDPR
+                                    <!--<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>--> OM GDPR
                                 </a>
                             </li>
 
@@ -56,9 +58,10 @@
 
                                     {% if view.id == 3 %}
                                         class="active"
+                                        style="font-size: 17px"
                                     {% endif %} >
 
-                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Personvernerklæring
+                                    <!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>--> Personvernerklæring
                                 </a>
 
                             </li>
