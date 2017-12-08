@@ -2,9 +2,15 @@
 body {
 
     width: 100%;
-    font-family: Copperplate;
+    font-family: "Al Nile";
     font-weight: 500;
 }
+
+:root {
+  --primary-color: #013f2d;
+  --secondary-color: rgba(219, 219, 219, 0.8);
+}
+
 
 #company_header {
 
@@ -21,39 +27,23 @@ body {
 
 /* TODO END */
 
-
-/*TODO BLUE NAVBAR*/
-.navbar li a {
-
-    color: rgba(0, 0, 0, 0.75);
-    font-size: 17px;
-}
-
-.navbar li a span {
-
-    font-size: 15px;
-}
-
-.navbar {
-
-    padding: 0;
-    margin: 0;
-    background-color: rgb(120, 210, 251);
-
-    position: fixed;
-    box-shadow: 0 2px 2px -2px #000000;
-}
-
-/* TODO END BLUE NAVBAR*/
-
 /* TODO WHITE NAVBAR */
 
 .navbar-collapse li a {
 
-    color: rgba(0, 0, 0, 0.75);
+    color: var(--secondary-color);
     font-size: 15px;
-    font-family: Copperplate;
-    border-radius: 2px;
+
+}
+
+.navbar-collapse li a:hover {
+
+    color: black;
+}
+
+.navbar-collapse .icon-bar {
+
+    background-color: var(--secondary-color);
 }
 
 /* TODO WHITE NAVBAR*/
@@ -67,7 +57,9 @@ body {
 .active {
 
     /*background-color: rgba(57, 57, 57, 0.21);*/
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    border-bottom-style: solid;
+    border-width: 1.5px;
 }
 
 .top_image_container {

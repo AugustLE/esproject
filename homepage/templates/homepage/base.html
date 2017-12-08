@@ -6,20 +6,20 @@
 
         <div class="top-container">
             <!-- class="navbar navbar-light navbar-fixed-top"  -->
-            <nav style="box-shadow: 0 1px 2px -2px #000000;position: fixed; width: 100%;top: 0;padding-top: 15px;padding-bottom: 10px;background-color: white; z-index: 10;" class="navbar-collapse" role="navigation">
+            <nav style="box-shadow: 0 1px 2px -2px #000000;position: fixed; width: 100%;top: 0;padding-top: 15px;padding-bottom: 10px;background-color: #013f2d; z-index: 10;" class="navbar-collapse" role="navigation">
 
                 <div class="container-fluid">
 
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_navbar">
 
-                            <span class="icon-bar" style="background-color: #000000;"></span>
-                            <span class="icon-bar" style="background-color: #000000;"></span>
-                            <span class="icon-bar" style="background-color: #000000;"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
 
                         </button>
                         <a id="company_header" class="navbar-brand" href={% url 'homepage:index' %}>
-                            <img id="company_header" src="../../static/homepage/images/logo_oval.svg">
+                            <img id="company_header" src="../../static/homepage/images/Logo_green.svg">
 
                         </a>
 
@@ -32,7 +32,7 @@
                                 <a href="{% url 'homepage:aboutUs' %}"
                                     {% if view.id == 1 %}
                                         class="active"
-                                        style="font-size: 17px"
+
 
                                     {% endif %}>
 
@@ -46,7 +46,7 @@
                                 <a href="{% url 'homepage:aboutGDPR' %}"
                                     {% if view.id == 2 %}
                                         class="active"
-                                        style="font-size: 17px"
+
                                     {% endif %} >
 
                                     <!--<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>--> OM GDPR
@@ -58,10 +58,10 @@
 
                                     {% if view.id == 3 %}
                                         class="active"
-                                        style="font-size: 17px"
+
                                     {% endif %} >
 
-                                    <!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>--> Personvernerklæring
+                                    <!--<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>--> PERSONVERNERKLÆRING
                                 </a>
 
                             </li>

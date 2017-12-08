@@ -74,9 +74,10 @@
 .slides .text_container .apply_button {
 
     padding: 10px;
+    padding-top: 12px;
     margin-top: 10px;
     text-decoration: none;
-    /*background-color: rgba(226, 226, 226, 0.64);*/
+    /*background-color: var(--primary-color);*/
     border-radius: 5px;
     color: black;
     box-shadow: 0 4px 6px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24);
@@ -103,6 +104,7 @@
     text-align: center;
     margin-top: 5px;
     top:0;
+    font-size: 30px;
 
 }
 

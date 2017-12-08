@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="412px" height="156px" viewBox="0 0 412 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo_green</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Logo_green" x="0" y="0" width="412" height="156"></rect>
+        <g id="Logo" transform="translate(67.000000, -7.000000)" fill="#DBDBDB">
+            <text id="dall" font-family="LucidaGrande-Bold, Lucida Grande" font-size="100" font-weight="bold" fill-opacity="0.75">
+                <tspan x="82" y="117">dall</tspan>
+            </text>
+            <text id="A" font-family="LucidaGrande, Lucida Grande" font-size="120" font-weight="normal" fill-opacity="0.750820879">
+                <tspan x="0" y="116">A</tspan>
+            </text>
+        </g>
+        <g id="Dots" transform="translate(192.000000, 127.000000)" fill="#998C37">
+            <circle id="Oval" cx="98.5" cy="7.5" r="7.5"></circle>
+            <circle id="Oval" cx="130.5" cy="7.5" r="7.5"></circle>
+            <circle id="Oval" cx="66.5" cy="7.5" r="7.5"></circle>
+            <circle id="Oval" cx="7.5" cy="7.5" r="7.5"></circle>
+        </g>
+    </g>
+</svg>
