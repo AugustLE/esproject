@@ -1,8 +1,9 @@
 .top_slider_container {
 
-    margin-top: 20px;
 
     /*background-color: rgba(226, 226, 226, 0.64);*/
+
+
 }
 
 * {box-sizing:border-box}
@@ -57,6 +58,8 @@
     border-radius: 5px;
     width: 100%;
     min-width: 200px;
+    max-width: 450px;
+    box-shadow: var(--shadow-light);
 }
 
 .slides .text_container {
@@ -79,7 +82,8 @@
     text-decoration: none;
     /*background-color: var(--primary-color);*/
     border-radius: 5px;
-    color: black;
+    font-weight: 800;
+    color: var(--primary-color);
     box-shadow: 0 4px 6px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24);
 }
 
@@ -93,9 +97,10 @@
 
     margin-top: 15px;
     text-align: center;
-    font-size: 18px;
-    font-weight: 100;
+    font-size: 16px;
+
     margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
 .slides .title {
@@ -104,7 +109,9 @@
     text-align: center;
     margin-top: 5px;
     top:0;
-    font-size: 30px;
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--primary-color);
 
 }
 
@@ -126,11 +133,12 @@
     width: auto;
     margin-top: -22px;
     padding: 16px;
-    color: #000000;
+
     font-weight: bold;
     font-size: 22px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
+    color: var(--primary-color);
 }
 
 /* Position the "next button" to the right */
@@ -171,14 +179,14 @@
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
+    background-color: var(--primary-color);
 }
 
 .dot_active, .dot:hover {
-  background-color: #717171;
+  background-color: #898989;
 }
 
 /* Fading animation */
